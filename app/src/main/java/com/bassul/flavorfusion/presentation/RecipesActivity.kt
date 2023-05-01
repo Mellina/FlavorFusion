@@ -9,7 +9,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.ActivityRecipesBinding
 import com.google.android.material.R.drawable
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecipesActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
