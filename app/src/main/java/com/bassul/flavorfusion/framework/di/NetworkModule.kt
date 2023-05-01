@@ -1,6 +1,7 @@
 package com.bassul.flavorfusion.framework.di
 
 import com.bassul.core.data.network.FoodApi
+import com.bassul.core.data.network.interceptor.AuthorizationInterceptor
 import com.bassul.flavorfusion.BuildConfig
 import com.bassul.flavorfusion.BuildConfig.BASE_URL
 import dagger.Module
@@ -34,11 +35,19 @@ object NetworkModule {
     }
 
     @Provides
+    fun provideAuthorizationInterceptor(): AuthorizationInterceptor {
+        return AuthorizationInterceptor(
+            BuildConfig.API_KEY
+        )
+    }
+    @Provides
     fun provideOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
+        authorizationInterceptor: AuthorizationInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(loggingInterceptor)
+            .addInterceptor(authorizationInterceptor)
             .readTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .connectTimeout(TIMEOUT_SECONDS, TimeUnit.SECONDS)
             .build()
