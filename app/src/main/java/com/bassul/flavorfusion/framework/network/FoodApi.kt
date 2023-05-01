@@ -1,6 +1,6 @@
-package com.bassul.core.data.network
+package com.bassul.flavorfusion.framework.network
 
-import com.bassul.core.data.network.response.DataWrapperResponse
+import com.bassul.flavorfusion.framework.network.response.DataWrapperResponse
 import retrofit2.http.GET
 import retrofit2.http.QueryMap
 

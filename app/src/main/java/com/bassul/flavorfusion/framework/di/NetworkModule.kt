@@ -1,7 +1,7 @@
 package com.bassul.flavorfusion.framework.di
 
-import com.bassul.core.data.network.FoodApi
-import com.bassul.core.data.network.interceptor.AuthorizationInterceptor
+import com.bassul.flavorfusion.framework.network.FoodApi
+import com.bassul.flavorfusion.framework.network.interceptor.AuthorizationInterceptor
 import com.bassul.flavorfusion.BuildConfig
 import com.bassul.flavorfusion.BuildConfig.BASE_URL
 import dagger.Module

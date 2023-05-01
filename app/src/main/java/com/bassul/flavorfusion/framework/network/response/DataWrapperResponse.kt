@@ -1,4 +1,4 @@
-package com.bassul.core.data.network.response
+package com.bassul.flavorfusion.framework.network.response
 
 data class DataWrapperResponse(
     val recipes: List<RecipeResponse>,
