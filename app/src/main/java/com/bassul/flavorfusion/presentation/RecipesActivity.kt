@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.ActivityRecipesBinding
 
@@ -21,6 +22,9 @@ class RecipesActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_post_container) as NavHostFragment
 
         navController = navHostFragment.navController
+
+        binding.bottomNavMain.setupWithNavController(navController)
+
         appBarConfiguration = AppBarConfiguration(
             setOf()
         )
