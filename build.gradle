@@ -4,6 +4,8 @@ buildscript {
     ext.kotlin_version = '1.7.10'
     ext.detekt_version = '1.22.0'
     ext.hilt_version = '2.43.2'
+    ext.paging_version = '3.0.1'
+    ext.coroutines_version = '1.5.1'
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
