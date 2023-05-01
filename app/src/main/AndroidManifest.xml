@@ -13,10 +13,10 @@
         android:theme="@style/Theme.FlavorFusion"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.MainActivity"
+            android:name=".presentation.RecipesActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.FlavorFusion">
+            android:theme="@style/Theme.AppCompat">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
