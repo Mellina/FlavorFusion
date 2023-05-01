@@ -7,6 +7,10 @@ plugins {
 
 apply from: '../config/detekt/detekt.gradle'
 
+def apiKeyPropertiesFile = rootProject.file("api.properties")
+def apiKeyProperties = new Properties()
+apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
+
 android {
     namespace 'com.bassul.flavorfusion'
     compileSdk 33
@@ -19,6 +23,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "API_KEY", apiKeyProperties['API_KEY'])
+        buildConfigField("String", "BASE_URL", '"https://api.spoonacular.com/recipes/"')
+
         vectorDrawables {
             useSupportLibrary true
         }
@@ -40,6 +48,7 @@ android {
     }
     buildFeatures {
         viewBinding true
+        buildConfig true
         compose true
     }
     composeOptions {
