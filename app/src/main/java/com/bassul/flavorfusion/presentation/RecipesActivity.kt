@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.ActivityRecipesBinding
+import com.google.android.material.R.drawable
 
 class RecipesActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -26,8 +27,19 @@ class RecipesActivity : AppCompatActivity() {
         binding.bottomNavMain.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf()
+            setOf(R.id.recipesFragment, R.id.favoritesFragment)
         )
+
+        binding.toolbarApp.setupWithNavController(navController, appBarConfiguration)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val isTopLevelDestination =
+                appBarConfiguration.topLevelDestinations.contains(destination.id)
+            if (!isTopLevelDestination) {
+                binding.toolbarApp
+                    .setNavigationIcon(drawable.material_ic_keyboard_arrow_previous_black_24dp)
+            }
+        }
 
     }
 }
