@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide
 
 class RecipesViewHolder(
     itemRecipesBinding: ItemRecipeBinding
-): ViewHolder(itemRecipesBinding.root) {
+) : ViewHolder(itemRecipesBinding.root) {
 
     private val textTitle = itemRecipesBinding.textTitle
     private val imageRecipe = itemRecipesBinding.imageRecipe
@@ -18,6 +18,7 @@ class RecipesViewHolder(
         textTitle.text = recipe.title
         Glide.with(itemView)
             .load(recipe.image)
+            .fallback(androidx.appcompat.R.drawable.btn_checkbox_checked_mtrl)
             .into(imageRecipe)
     }
 
@@ -26,7 +27,7 @@ class RecipesViewHolder(
             parent: ViewGroup
         ): RecipesViewHolder {
             val inflater = LayoutInflater.from(parent.context)
-         val itemBinding = ItemRecipeBinding.inflate(inflater, parent, false)
+            val itemBinding = ItemRecipeBinding.inflate(inflater, parent, false)
             return RecipesViewHolder(itemBinding)
         }
     }

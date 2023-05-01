@@ -16,11 +16,12 @@
             android:id="@+id/image_recipe"
             android:layout_width="0dp"
             android:layout_height="170dp"
-            android:scaleType="fitXY"
             android:importantForAccessibility="no"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
-            tools:ignore="MissingConstraints" />
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <TextView
             android:id="@+id/text_title"
