@@ -1,5 +1,6 @@
 package com.bassul.flavorfusion.framework.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bassul.core.data.repository.RecipesRemoteDataSource
@@ -31,7 +32,7 @@ class RecipesPagingSource(
             val totalRecipes = response.totalResults
 
             LoadResult.Page(
-                data = response.recipes.map {
+                data = response.results.map {
                     it.toRecipeModel()
                 },
                 null,

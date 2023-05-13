@@ -22,6 +22,6 @@ class AuthorizationInterceptor(
     }
 
     companion object {
-        private const val QUERY_PARAMETER_API_KEY = "apikey"
+        private const val QUERY_PARAMETER_API_KEY = "apiKey"
     }
 }

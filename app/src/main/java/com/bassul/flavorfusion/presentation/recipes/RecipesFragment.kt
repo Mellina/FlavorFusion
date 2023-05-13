@@ -5,10 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bassul.core.domain.model.Recipe
-import com.bassul.flavorfusion.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -17,6 +18,8 @@ class RecipesFragment : Fragment() {
     private val binding: FragmentRecipesBinding get() = _binding!!
 
     private val recipesAdapter = RecipesAdapter()
+
+    private val viewModel: RecipesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,19 +36,16 @@ class RecipesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecipesAdapter()
 
-        @Suppress("MaxLineLength")
-        recipesAdapter.submitList(
-            listOf(
-                Recipe("Sopa",
-                    "http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available"),
-                Recipe("Suco", "https://img.ibxk.com.br/materias/5866/21577.jpg"),
-                Recipe("Feijão", "https://img.ibxk.com.br/materias/5866/21577.jpg"),
-            )
-        )
+        lifecycleScope.launch {
+            viewModel.recipesPagingData("").collect { pagingData ->
+                recipesAdapter.submitData(pagingData)
+            }
+        }
+
     }
 
     private fun initRecipesAdapter() {
-        with(binding.recyclerRecipes){
+        with(binding.recyclerRecipes) {
             setHasFixedSize(true)
             adapter = recipesAdapter
         }
