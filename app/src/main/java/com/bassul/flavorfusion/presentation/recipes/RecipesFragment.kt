@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.LoadState
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +22,7 @@ class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     private val binding: FragmentRecipesBinding get() = _binding!!
 
-    private val recipesAdapter = RecipesAdapter()
+    private lateinit var recipesAdapter: RecipesAdapter
 
     private val viewModel: RecipesViewModel by viewModels()
 
@@ -41,13 +43,16 @@ class RecipesFragment : Fragment() {
         observeInitialLoadState()
 
         lifecycleScope.launch {
-            viewModel.recipesPagingData("").collect { pagingData ->
-                recipesAdapter.submitData(pagingData)
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.recipesPagingData("").collect { pagingData ->
+                    recipesAdapter.submitData(pagingData)
+                }
             }
         }
     }
 
     private fun initRecipesAdapter() {
+        recipesAdapter = RecipesAdapter()
         with(binding.recyclerRecipes) {
             setHasFixedSize(true)
             adapter = recipesAdapter
