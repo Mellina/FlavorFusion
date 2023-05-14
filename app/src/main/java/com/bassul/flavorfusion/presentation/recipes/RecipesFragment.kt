@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -35,6 +38,7 @@ class RecipesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecipesAdapter()
+        observeInitialLoadState()
 
         lifecycleScope.launch {
             viewModel.recipesPagingData("").collect { pagingData ->
@@ -49,6 +53,46 @@ class RecipesFragment : Fragment() {
             setHasFixedSize(true)
             adapter = recipesAdapter
         }
+    }
+
+    private fun observeInitialLoadState() {
+        lifecycleScope.launch {
+            recipesAdapter.loadStateFlow.collectLatest { loadState ->
+
+                binding.flipperRecipes.displayedChild = when (loadState.refresh) {
+                    is LoadState.Loading -> {
+                        setShimmerVisibility(true)
+                        FLIPPER_CHILD_LOADING
+                    }
+
+                    is LoadState.NotLoading -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
+                    }
+                    is LoadState.Error -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_ERROR
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setShimmerVisibility(visibility: Boolean) {
+        binding.includeViewRecipesLoadingState.shimmerRecipes.run {
+            isVisible = visibility
+            if (visibility) {
+                startShimmer()
+            } else {
+                stopShimmer()
+            }
+        }
+    }
+
+    companion object {
+        private const val FLIPPER_CHILD_LOADING = 0
+        private const val FLIPPER_CHILD_CHARACTERS = 1
+        private const val FLIPPER_CHILD_ERROR = 2
     }
 
 }
