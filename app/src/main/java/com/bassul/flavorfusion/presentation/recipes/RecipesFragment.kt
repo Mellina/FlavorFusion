@@ -54,6 +54,7 @@ class RecipesFragment : Fragment() {
     private fun initRecipesAdapter() {
         recipesAdapter = RecipesAdapter()
         with(binding.recyclerRecipes) {
+            scrollToPosition(0)
             setHasFixedSize(true)
             adapter = recipesAdapter.withLoadStateFooter(
                 footer = RecipesLoadMoreStateAdapter(
