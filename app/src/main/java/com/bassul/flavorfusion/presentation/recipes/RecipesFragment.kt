@@ -45,7 +45,6 @@ class RecipesFragment : Fragment() {
                 recipesAdapter.submitData(pagingData)
             }
         }
-
     }
 
     private fun initRecipesAdapter() {
@@ -71,6 +70,9 @@ class RecipesFragment : Fragment() {
                     }
                     is LoadState.Error -> {
                         setShimmerVisibility(false)
+                        binding.includeViewRecipesErrorState.buttonRetry.setOnClickListener {
+                            recipesAdapter.refresh()
+                        }
                         FLIPPER_CHILD_ERROR
                     }
                 }
