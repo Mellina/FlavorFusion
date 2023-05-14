@@ -55,7 +55,11 @@ class RecipesFragment : Fragment() {
         recipesAdapter = RecipesAdapter()
         with(binding.recyclerRecipes) {
             setHasFixedSize(true)
-            adapter = recipesAdapter
+            adapter = recipesAdapter.withLoadStateFooter(
+                footer = RecipesLoadMoreStateAdapter(
+                    retry = recipesAdapter::retry
+                )
+            )
         }
     }
 
