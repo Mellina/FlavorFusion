@@ -1,18 +1,17 @@
 package com.bassul.flavorfusion.presentation.recipes
 
 import androidx.paging.PagingData
-import com.bassul.core.domain.model.Recipe
 import com.bassul.core.usecase.GetRecipesUseCase
+import com.bassul.testing.MainCoroutineRule
+import com.bassul.testing.model.RecipeFactory
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
 import org.junit.Assert.*
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -22,23 +21,25 @@ import org.mockito.junit.MockitoJUnitRunner
 @RunWith(MockitoJUnitRunner::class)
 class RecipesViewModelTest {
 
-    val testDispatcher: TestCoroutineDispatcher = TestCoroutineDispatcher()
+    @get:Rule
+    var mainCoroutineRule = MainCoroutineRule()
 
     @Mock
     lateinit var getRecipesUseCase: GetRecipesUseCase
 
     private lateinit var recipesViewModel: RecipesViewModel
 
+    private val recipeFactory = RecipeFactory()
+
     private val pagingDataRecipe = PagingData.from(
         listOf(
-            Recipe("Receita 1", ""),
-            Recipe("Receita 2", "")
+            recipeFactory.create(RecipeFactory.Recipe.Pasta),
+            recipeFactory.create(RecipeFactory.Recipe.Juice)
         )
     )
 
     @Before
     fun setUp() {
-        Dispatchers.setMain(testDispatcher)
         recipesViewModel = RecipesViewModel(getRecipesUseCase)
     }
 
