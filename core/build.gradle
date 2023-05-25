@@ -15,7 +15,7 @@ dependencies {
     api "com.squareup.retrofit2:converter-gson:$retrofit_version"
 
     // OkHttp
-    api(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+    api(platform("com.squareup.okhttp3:okhttp-bom:4.11.0"))
     api("com.squareup.okhttp3:okhttp")
     api("com.squareup.okhttp3:logging-interceptor")
 
