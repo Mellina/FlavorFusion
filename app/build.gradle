@@ -11,6 +11,7 @@ def apiKeyPropertiesFile = rootProject.file("api.properties")
 def apiKeyProperties = new Properties()
 apiKeyProperties.load(new FileInputStream(apiKeyPropertiesFile))
 
+
 android {
     namespace 'com.bassul.flavorfusion'
     compileSdk 33
