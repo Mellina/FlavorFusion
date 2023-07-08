@@ -1,0 +1,97 @@
+{
+  "project_info": {
+    "project_number": "490086090285",
+    "project_id": "flavor-fusion---debug",
+    "storage_bucket": "flavor-fusion---debug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490086090285:android:8f9f6c195df55452961aa4",
+        "android_client_info": {
+          "package_name": "com.bassul.flavorfusion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490086090285-q9gti139drn93jd16iis1p5s2nf37k6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-lmLb3FJd7GG_jGiAVgZAec6U1lPu24I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490086090285-q9gti139drn93jd16iis1p5s2nf37k6r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490086090285:android:a52fb441e2723d06961aa4",
+        "android_client_info": {
+          "package_name": "com.bassul.flavorfusion.debug"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490086090285-q9gti139drn93jd16iis1p5s2nf37k6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-lmLb3FJd7GG_jGiAVgZAec6U1lPu24I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490086090285-q9gti139drn93jd16iis1p5s2nf37k6r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490086090285:android:a7765e0d56c78364961aa4",
+        "android_client_info": {
+          "package_name": "com.bassul.flavorfusion.staging"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490086090285-q9gti139drn93jd16iis1p5s2nf37k6r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-lmLb3FJd7GG_jGiAVgZAec6U1lPu24I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490086090285-q9gti139drn93jd16iis1p5s2nf37k6r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
