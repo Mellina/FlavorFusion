@@ -14,10 +14,12 @@ import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
+import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.presentation.detail.DetailViewArg
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -28,6 +30,9 @@ class RecipesFragment : Fragment() {
     private lateinit var recipesAdapter: RecipesAdapter
 
     private val viewModel: RecipesViewModel by viewModels()
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -55,7 +60,7 @@ class RecipesFragment : Fragment() {
     }
 
     private fun initRecipesAdapter() {
-        recipesAdapter = RecipesAdapter { recipe, view ->
+        recipesAdapter = RecipesAdapter(imageLoader) { recipe, view ->
             val extras = FragmentNavigatorExtras(
                 view to recipe.title
             )

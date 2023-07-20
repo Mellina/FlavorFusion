@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentDetailBinding
+import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -20,6 +22,8 @@ class DetailFragment : Fragment() {
 
     private val args by navArgs<DetailFragmentArgs>()
 
+    @Inject
+    lateinit var imageLoader: ImageLoader
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,10 +39,11 @@ class DetailFragment : Fragment() {
         val detailViewArg = args.detailViewArg
         binding.imageRecipe.run {
             transitionName = detailViewArg.name
-            Glide.with(context)
-                .load(detailViewArg.imageUrl)
-                .fallback(R.drawable.ic_launcher_background) //provisório - colocar imagem de erro ao carregar
-                .into(this)
+            imageLoader.load(
+                this,
+                detailViewArg.imageUrl,
+                R.drawable.ic_launcher_background
+            )//provisório - colocar imagem de erro ao carregar
         }
         setSharedElementTransitionOnEnter()
     }
