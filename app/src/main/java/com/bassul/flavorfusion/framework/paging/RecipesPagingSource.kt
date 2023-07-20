@@ -1,15 +1,12 @@
 package com.bassul.flavorfusion.framework.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.bassul.core.data.repository.RecipesRemoteDataSource
 import com.bassul.core.domain.model.Recipe
-import com.bassul.flavorfusion.framework.network.response.DataWrapperResponse
-import com.bassul.flavorfusion.framework.network.response.toRecipeModel
 
 class RecipesPagingSource(
-    private val remoteDataSource: RecipesRemoteDataSource<DataWrapperResponse>,
+    private val remoteDataSource: RecipesRemoteDataSource,
     private val query: String
 ) : PagingSource<Int, Recipe>() {
 
@@ -26,15 +23,13 @@ class RecipesPagingSource(
                 queries["query"] = query
             }
 
-            val response = remoteDataSource.fetchRecipes(queries)
+            val recipePaging = remoteDataSource.fetchRecipes(queries)
 
-            val responseOffset = response.offset
-            val totalRecipes = response.totalResults
+            val responseOffset = recipePaging.offset
+            val totalRecipes = recipePaging.totalResults
 
             LoadResult.Page(
-                data = response.results.map {
-                    it.toRecipeModel()
-                },
+                data = recipePaging.recipes,
                 null,
                 nextKey = if (offset < totalRecipes) {
                     responseOffset + LIMIT

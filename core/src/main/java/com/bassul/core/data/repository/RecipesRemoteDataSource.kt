@@ -1,6 +1,8 @@
 package com.bassul.core.data.repository
 
-interface RecipesRemoteDataSource<T> {
+import com.bassul.core.domain.model.RecipePaging
 
-    suspend fun fetchRecipes(queries: Map<String, String>) : T
+interface RecipesRemoteDataSource {
+
+    suspend fun fetchRecipes(queries: Map<String, String>) : RecipePaging
 }
