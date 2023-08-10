@@ -2,15 +2,16 @@ package com.bassul.flavorfusion.presentation.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentDetailBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
-import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,6 +20,8 @@ class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding: FragmentDetailBinding get() = _binding!!
+
+    private val viewModel: DetailViewModel by viewModels()
 
     private val args by navArgs<DetailFragmentArgs>()
 
@@ -46,6 +49,18 @@ class DetailFragment : Fragment() {
             )//provisório - colocar imagem de erro ao carregar
         }
         setSharedElementTransitionOnEnter()
+
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            val logResult = when (uiState) {
+                DetailViewModel.UiState.Loading -> "Loading..."
+                is DetailViewModel.UiState.Success -> uiState.detailsRecipe.toString()
+                is DetailViewModel.UiState.Error -> "Error ${uiState.error.toString()}"
+            }
+
+            Log.d(DetailFragment::class.simpleName, logResult)
+        }
+
+        viewModel.getDetailsRecipe(detailViewArg.id)
     }
 
     private fun setSharedElementTransitionOnEnter() {

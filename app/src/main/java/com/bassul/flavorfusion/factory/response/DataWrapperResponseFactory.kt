@@ -8,10 +8,12 @@ class DataWrapperResponseFactory {
     fun create() = DataWrapperResponse(
         listOf(
             RecipeResponse(
+                0,
                 "Pasta",
                 ""
             ),
             RecipeResponse(
+                1,
                 "Juice",
                 ""
             )

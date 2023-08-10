@@ -1,5 +1,7 @@
 package com.bassul.flavorfusion.framework.di
 
+import com.bassul.core.usecase.GetDetailsRecipeUseCase
+import com.bassul.core.usecase.GetDetailsRecipeUseCaseImpl
 import com.bassul.core.usecase.GetRecipesUseCase
 import com.bassul.core.usecase.GetRecipesUseCaseImpl
 import dagger.Binds
@@ -12,5 +14,7 @@ import dagger.hilt.android.components.ViewModelComponent
 interface UseCaseModule {
 
     @Binds
-    fun bindRecipeUseCase(useCase: GetRecipesUseCaseImpl): GetRecipesUseCase
+    fun bindGetRecipeUseCase(useCase: GetRecipesUseCaseImpl): GetRecipesUseCase
+    @Binds
+    fun bindGetDetailsRecipeUseCase(useCase: GetDetailsRecipeUseCaseImpl): GetDetailsRecipeUseCase
 }

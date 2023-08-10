@@ -68,7 +68,7 @@ class RecipesFragment : Fragment() {
             val directions = RecipesFragmentDirections
                 .actionRecipesFragmentToDetailFragment(
                     recipe.title,
-                    DetailViewArg(recipe.title, recipe.image)
+                    DetailViewArg(recipe.id, recipe.title, recipe.image)
                 )
 
             findNavController().navigate(directions, extras)

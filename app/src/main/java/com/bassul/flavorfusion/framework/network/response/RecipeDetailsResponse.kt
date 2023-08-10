@@ -7,7 +7,7 @@ data class RecipeDetailsResponse(
     @SerializedName("id")
     val id: Long,
     @SerializedName("extendedIngredients")
-    val extendedIngredients: ExtendedIngredientResponse,
+    val extendedIngredients: List<ExtendedIngredientResponse>,
     @SerializedName("dishTypes")
     val dishTypes: List<String>,
     @SerializedName("servings")
@@ -17,9 +17,14 @@ data class RecipeDetailsResponse(
 )
 
 fun RecipeDetailsResponse.toRecipeDetailsModel(): RecipeDetails {
+
+    val ingredients = extendedIngredients.map {
+        it.toExtendedIngredientModal()
+    }
+
     return RecipeDetails(
         id = id,
-        extendedIngredients = extendedIngredients.toExtendedIngredientModal(),
+        extendedIngredients = ingredients,
         dishTypes = dishTypes,
         servings = servings,
         readyInMinutes = readyInMinutes
