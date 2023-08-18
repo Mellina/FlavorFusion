@@ -51,13 +51,19 @@ class DetailFragment : Fragment() {
         setSharedElementTransitionOnEnter()
 
         viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-            val logResult = when (uiState) {
-                DetailViewModel.UiState.Loading -> "Loading..."
-                is DetailViewModel.UiState.Success -> uiState.detailsRecipe.toString()
-                is DetailViewModel.UiState.Error -> "Error ${uiState.error.toString()}"
+            binding.flipperDetails.displayedChild = when (uiState) {
+                DetailViewModel.UiState.Loading -> {
+                    FLIPPER_CHILD_POSITION_LOADING
+                }
+
+                is DetailViewModel.UiState.Success -> {
+                    uiState.detailsRecipe.toString()
+                    FLIPPER_CHILD_POSITION_SUCCESS
+                }
+
+                is DetailViewModel.UiState.Error -> FLIPPER_CHILD_POSITION_ERROR
             }
 
-            Log.d(DetailFragment::class.simpleName, logResult)
         }
 
         viewModel.getDetailsRecipe(detailViewArg.id)
@@ -73,6 +79,12 @@ class DetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val FLIPPER_CHILD_POSITION_LOADING = 0
+        private const val FLIPPER_CHILD_POSITION_SUCCESS = 1
+        private const val FLIPPER_CHILD_POSITION_ERROR = 2
     }
 
 }
