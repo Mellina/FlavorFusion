@@ -2,8 +2,7 @@ package com.bassul.flavorfusion.framework.paging
 
 import androidx.paging.PagingSource
 import com.bassul.core.data.repository.RecipesRemoteDataSource
-import com.bassul.flavorfusion.factory.response.DataWrapperResponseFactory
-import com.bassul.flavorfusion.framework.network.response.DataWrapperResponse
+import com.bassul.flavorfusion.factory.response.RecipesPagingFactory
 import com.bassul.testing.MainCoroutineRule
 import com.bassul.testing.model.RecipeFactory
 import com.nhaarman.mockitokotlin2.any
@@ -25,9 +24,9 @@ class RecipesPagingSourceTest {
     var mainCoroutineRule = MainCoroutineRule()
 
     @Mock
-    lateinit var remoteDataSource: RecipesRemoteDataSource<DataWrapperResponse>
+    lateinit var remoteDataSource: RecipesRemoteDataSource
 
-    private val dataWrapperResponseFactory = DataWrapperResponseFactory()
+    private val dataWrapperResponseFactory = RecipesPagingFactory()
 
     private val recipeFactory = RecipeFactory()
 

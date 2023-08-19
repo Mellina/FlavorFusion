@@ -1,24 +1,26 @@
 package com.bassul.flavorfusion.factory.response
 
+import com.bassul.core.domain.model.Recipe
+import com.bassul.core.domain.model.RecipePaging
 import com.bassul.flavorfusion.framework.network.response.DataWrapperResponse
 import com.bassul.flavorfusion.framework.network.response.RecipeResponse
 
-class DataWrapperResponseFactory {
+class RecipesPagingFactory {
 
-    fun create() = DataWrapperResponse(
+    fun create() = RecipePaging(
+        offset = 0,
+        totalResults = 20,
         listOf(
-            RecipeResponse(
+            Recipe(
                 0,
                 "Pasta",
                 ""
             ),
-            RecipeResponse(
+            Recipe(
                 1,
                 "Juice",
                 ""
             )
         ),
-        0,
-        2
     )
 }
