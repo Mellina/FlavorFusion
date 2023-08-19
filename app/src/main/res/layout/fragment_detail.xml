@@ -98,7 +98,9 @@
                 app:layout_constraintTop_toBottomOf="@+id/ready_in_minutes" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <include layout="@layout/include_error_view" />
+        <include
+            android:id="@+id/include_error_view"
+            layout="@layout/include_error_view" />
 
         <!-- Existe o caso de algum dado voltar vazio? Se tiver posso fazer um 4 estado de empty state -->
     </ViewFlipper>

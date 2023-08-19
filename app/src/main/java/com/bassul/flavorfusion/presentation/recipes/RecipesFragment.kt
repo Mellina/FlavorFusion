@@ -102,7 +102,7 @@ class RecipesFragment : Fragment() {
                     is LoadState.Error -> {
                         setShimmerVisibility(false)
                         binding.includeViewRecipesErrorState.buttonRetry.setOnClickListener {
-                            recipesAdapter.refresh()
+                            recipesAdapter.retry()
                         }
                         FLIPPER_CHILD_ERROR
                     }

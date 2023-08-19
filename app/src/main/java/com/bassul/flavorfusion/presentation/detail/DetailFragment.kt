@@ -70,11 +70,20 @@ class DetailFragment : Fragment() {
                             ingredientsAdapter.submitList(uiState.detailsRecipe.extendedIngredients)
                         }
                     }
-                    binding.ingredients.listIngredients.adapter = ingredientsAdapter
+                    binding.ingredients.listIngredients.run {
+                        setHasFixedSize(true)
+                        adapter = ingredientsAdapter
+                    }
+
                     FLIPPER_CHILD_POSITION_SUCCESS
                 }
 
-                is DetailViewModel.UiState.Error -> FLIPPER_CHILD_POSITION_ERROR
+                is DetailViewModel.UiState.Error -> {
+                    binding.includeErrorView.buttonRetry.setOnClickListener {
+                        viewModel.getDetailsRecipe(detailViewArg.id)
+                    }
+                    FLIPPER_CHILD_POSITION_ERROR
+                }
             }
 
         }
