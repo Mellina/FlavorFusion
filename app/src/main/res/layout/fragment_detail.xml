@@ -90,6 +90,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/title_ready_in_minutes" />
 
             <include
+                android:id="@+id/ingredients"
                 layout="@layout/list_ingredient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

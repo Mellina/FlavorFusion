@@ -2,17 +2,20 @@ package com.bassul.flavorfusion.presentation.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentDetailBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,6 +23,8 @@ class DetailFragment : Fragment() {
 
     private var _binding: FragmentDetailBinding? = null
     private val binding: FragmentDetailBinding get() = _binding!!
+
+    private lateinit var ingredientsAdapter: IngredientsAdapter
 
     private val viewModel: DetailViewModel by viewModels()
 
@@ -58,6 +63,14 @@ class DetailFragment : Fragment() {
 
                 is DetailViewModel.UiState.Success -> {
                     uiState.detailsRecipe.toString()
+
+                    ingredientsAdapter = IngredientsAdapter(imageLoader)
+                    lifecycleScope.launch {
+                        viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                            ingredientsAdapter.submitList(uiState.detailsRecipe.extendedIngredients)
+                        }
+                    }
+                    binding.ingredients.listIngredients.adapter = ingredientsAdapter
                     FLIPPER_CHILD_POSITION_SUCCESS
                 }
 
