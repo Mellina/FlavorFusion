@@ -17,6 +17,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class RecipesPagingSourceTest {
 
@@ -37,7 +38,6 @@ class RecipesPagingSourceTest {
         recipesPagingSource = RecipesPagingSource(remoteDataSource, "")
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun `should return a success load result w3hen load is called`() = runBlockingTest {
         // Arrange
@@ -69,7 +69,6 @@ class RecipesPagingSourceTest {
         )
     }
 
-    @ExperimentalCoroutinesApi
     @Test
     fun `should return a error load result when load is called`() = runBlockingTest {
         //Arrange
