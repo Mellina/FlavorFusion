@@ -9,6 +9,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -39,7 +40,7 @@ class RecipesPagingSourceTest {
     }
 
     @Test
-    fun `should return a success load result w3hen load is called`() = runBlockingTest {
+    fun `should return a success load result w3hen load is called`() = runTest {
         // Arrange
         whenever(remoteDataSource.fetchRecipes(any()))
             .thenReturn(dataWrapperResponseFactory.create())
@@ -70,7 +71,7 @@ class RecipesPagingSourceTest {
     }
 
     @Test
-    fun `should return a error load result when load is called`() = runBlockingTest {
+    fun `should return a error load result when load is called`() = runTest {
         //Arrange
         val exception = RuntimeException()
         whenever(remoteDataSource.fetchRecipes(any()))
