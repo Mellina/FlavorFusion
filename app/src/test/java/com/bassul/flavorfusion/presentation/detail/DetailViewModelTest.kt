@@ -36,7 +36,6 @@ class DetailViewModelTest {
     @Mock
     private lateinit var uiStateObserver: Observer<UiState>
 
-
     private val detailRecipe = listOf(DetailRecipeFactory().create(DetailRecipeFactory.FakeDetailRecipe.FakeDetailRecipe1))
 
     private lateinit var detailViewModel: DetailViewModel
