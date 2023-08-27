@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:text="Pasta"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/image_recipe" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/title_dish_type"
