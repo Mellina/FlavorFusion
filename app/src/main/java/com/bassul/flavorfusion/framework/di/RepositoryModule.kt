@@ -18,6 +18,6 @@ interface RepositoryModule {
     fun bindRecipeRepository(repository: RecipesRepositoryImpl): RecipesRepository
 
     @Binds
-    fun bindRemoteDataSource(dataSource: RetrofitRecipesDataSource) : RecipesRemoteDataSource<DataWrapperResponse>
+    fun bindRemoteDataSource(dataSource: RetrofitRecipesDataSource) : RecipesRemoteDataSource
 
 }

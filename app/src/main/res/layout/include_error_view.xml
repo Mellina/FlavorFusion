@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:text="Error to load recipes"
+        android:text="Error to load datas"
         android:textAlignment="center"
         android:textSize="32sp"
         app:drawableTopCompat="@android:drawable/stat_notify_error" />

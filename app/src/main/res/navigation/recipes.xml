@@ -10,5 +10,23 @@
         android:id="@+id/recipesFragment"
         android:name="com.bassul.flavorfusion.presentation.recipes.RecipesFragment"
         android:label="fragment_recipes"
-        tools:layout="@layout/fragment_recipes" />
+        tools:layout="@layout/fragment_recipes" >
+        <action
+            android:id="@+id/action_recipesFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.bassul.flavorfusion.presentation.detail.DetailFragment"
+        android:label="{screenTitle}"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="screenTitle"
+            app:argType="string" />
+        <argument
+            android:name="detailViewArg"
+            app:argType="com.bassul.flavorfusion.presentation.detail.DetailViewArg" />
+
+    </fragment>
 </navigation>
