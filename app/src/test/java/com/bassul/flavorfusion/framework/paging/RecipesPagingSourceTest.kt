@@ -2,14 +2,14 @@ package com.bassul.flavorfusion.framework.paging
 
 import androidx.paging.PagingSource
 import com.bassul.core.data.repository.RecipesRemoteDataSource
-import com.bassul.flavorfusion.factory.response.DataWrapperResponseFactory
-import com.bassul.flavorfusion.framework.network.response.DataWrapperResponse
+import com.bassul.flavorfusion.factory.response.RecipesPagingFactory
 import com.bassul.testing.MainCoroutineRule
 import com.bassul.testing.model.RecipeFactory
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -18,6 +18,7 @@ import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
+@ExperimentalCoroutinesApi
 @RunWith(MockitoJUnitRunner::class)
 class RecipesPagingSourceTest {
 
@@ -25,9 +26,9 @@ class RecipesPagingSourceTest {
     var mainCoroutineRule = MainCoroutineRule()
 
     @Mock
-    lateinit var remoteDataSource: RecipesRemoteDataSource<DataWrapperResponse>
+    lateinit var remoteDataSource: RecipesRemoteDataSource
 
-    private val dataWrapperResponseFactory = DataWrapperResponseFactory()
+    private val dataWrapperResponseFactory = RecipesPagingFactory()
 
     private val recipeFactory = RecipeFactory()
 
@@ -38,9 +39,8 @@ class RecipesPagingSourceTest {
         recipesPagingSource = RecipesPagingSource(remoteDataSource, "")
     }
 
-    @ExperimentalCoroutinesApi
     @Test
-    fun `should return a success load result w3hen load is called`() = runBlockingTest {
+    fun `should return a success load result w3hen load is called`() = runTest {
         // Arrange
         whenever(remoteDataSource.fetchRecipes(any()))
             .thenReturn(dataWrapperResponseFactory.create())
@@ -70,9 +70,8 @@ class RecipesPagingSourceTest {
         )
     }
 
-    @ExperimentalCoroutinesApi
     @Test
-    fun `should return a error load result when load is called`() = runBlockingTest {
+    fun `should return a error load result when load is called`() = runTest {
         //Arrange
         val exception = RuntimeException()
         whenever(remoteDataSource.fetchRecipes(any()))

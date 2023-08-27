@@ -10,11 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
+import com.bassul.flavorfusion.framework.imageloader.ImageLoader
+import com.bassul.flavorfusion.presentation.detail.DetailViewArg
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RecipesFragment : Fragment() {
@@ -25,6 +30,9 @@ class RecipesFragment : Fragment() {
     private lateinit var recipesAdapter: RecipesAdapter
 
     private val viewModel: RecipesViewModel by viewModels()
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +60,20 @@ class RecipesFragment : Fragment() {
     }
 
     private fun initRecipesAdapter() {
-        recipesAdapter = RecipesAdapter()
+        recipesAdapter = RecipesAdapter(imageLoader) { recipe, view ->
+            val extras = FragmentNavigatorExtras(
+                view to recipe.title
+            )
+
+            val directions = RecipesFragmentDirections
+                .actionRecipesFragmentToDetailFragment(
+                    recipe.title,
+                    DetailViewArg(recipe.id, recipe.title, recipe.image)
+                )
+
+            findNavController().navigate(directions, extras)
+        }
+
         with(binding.recyclerRecipes) {
             scrollToPosition(0)
             setHasFixedSize(true)
@@ -81,7 +102,7 @@ class RecipesFragment : Fragment() {
                     is LoadState.Error -> {
                         setShimmerVisibility(false)
                         binding.includeViewRecipesErrorState.buttonRetry.setOnClickListener {
-                            recipesAdapter.refresh()
+                            recipesAdapter.retry()
                         }
                         FLIPPER_CHILD_ERROR
                     }
@@ -99,6 +120,11 @@ class RecipesFragment : Fragment() {
                 stopShimmer()
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {

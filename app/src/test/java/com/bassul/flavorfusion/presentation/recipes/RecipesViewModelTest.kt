@@ -8,7 +8,7 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
@@ -45,7 +45,7 @@ class RecipesViewModelTest {
 
     @Test
     fun `should validate the paging data object values when calling recipesPagingData`() =
-        runBlockingTest {
+        runTest {
             whenever(
                 getRecipesUseCase.invoke(any())
             ).thenReturn(
@@ -59,7 +59,7 @@ class RecipesViewModelTest {
 
     @Test(expected = java.lang.RuntimeException::class)
     fun `should throw an exception when the calling to the use case returns an exception`() =
-        runBlockingTest {
+        runTest {
             whenever(
                 getRecipesUseCase.invoke(any())
             ).thenThrow(

@@ -6,10 +6,12 @@ buildscript {
     ext.hilt_version = '2.43.2'
     ext.paging_version = '3.0.1'
     ext.coroutines_version = '1.6.0'
+    ext.nav_version = '2.5.0'
 
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version"
     }
 }
 
