@@ -1,5 +1,7 @@
 package com.bassul.flavorfusion.framework.di
 
+import com.bassul.core.usecase.AddFavoriteUseCase
+import com.bassul.core.usecase.AddFavoriteUseCaseImpl
 import com.bassul.core.usecase.GetDetailsRecipeUseCase
 import com.bassul.core.usecase.GetDetailsRecipeUseCaseImpl
 import com.bassul.core.usecase.GetRecipesUseCase
@@ -17,4 +19,6 @@ interface UseCaseModule {
     fun bindGetRecipeUseCase(useCase: GetRecipesUseCaseImpl): GetRecipesUseCase
     @Binds
     fun bindGetDetailsRecipeUseCase(useCase: GetDetailsRecipeUseCaseImpl): GetDetailsRecipeUseCase
+    @Binds
+    fun bindAddFavoriteUseCase(useCase: AddFavoriteUseCaseImpl): AddFavoriteUseCase
 }
