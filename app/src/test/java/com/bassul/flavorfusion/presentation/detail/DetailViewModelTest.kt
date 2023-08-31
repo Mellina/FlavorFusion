@@ -2,9 +2,9 @@ package com.bassul.flavorfusion.presentation.detail
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.bassul.core.usecase.AddFavoriteUseCase
 import com.bassul.core.usecase.GetDetailsRecipeUseCase
 import com.bassul.core.usecase.base.ResultStatus
-import com.bassul.flavorfusion.presentation.detail.DetailViewModel.UiState
 import com.bassul.testing.MainCoroutineRule
 import com.bassul.testing.model.DetailRecipeFactory
 import com.nhaarman.mockitokotlin2.any
@@ -34,7 +34,10 @@ class DetailViewModelTest {
     lateinit var getDetailsRecipeUseCase: GetDetailsRecipeUseCase
 
     @Mock
-    private lateinit var uiStateObserver: Observer<UiState>
+    private lateinit var addFavoriteUseCase: AddFavoriteUseCase
+
+    @Mock
+    private lateinit var uiStateObserver: Observer<UiActionStateLiveData.UiState>
 
     private val detailRecipe = listOf(DetailRecipeFactory().create(DetailRecipeFactory.FakeDetailRecipe.FakeDetailRecipe1))
 
@@ -42,8 +45,13 @@ class DetailViewModelTest {
 
     @Before
     fun setUp() {
-        detailViewModel = DetailViewModel(getDetailsRecipeUseCase)
-        detailViewModel.uiState.observeForever(uiStateObserver)
+        detailViewModel = DetailViewModel(
+            getDetailsRecipeUseCase,
+            addFavoriteUseCase,
+            mainCoroutineRule.testDispatcherProvider
+        ).apply {
+            details.state.observeForever(uiStateObserver)
+        }
     }
 
     @Test
@@ -58,9 +66,9 @@ class DetailViewModelTest {
                         )
                     )
                 )
-            detailViewModel.getDetailsRecipe(10)
+            detailViewModel.details.load(10)
 
-            verify(uiStateObserver).onChanged(isA<UiState.Success>())
+            verify(uiStateObserver).onChanged(isA<UiActionStateLiveData.UiState.Success>())
         }
 
     @Test
@@ -74,9 +82,9 @@ class DetailViewModelTest {
                         )
                     )
                 )
-            detailViewModel.getDetailsRecipe(10)
+            detailViewModel.details.load(10)
 
-            verify(uiStateObserver).onChanged(isA<UiState.Error>())
+            verify(uiStateObserver).onChanged(isA<UiActionStateLiveData.UiState.Error>())
         }
 
 
