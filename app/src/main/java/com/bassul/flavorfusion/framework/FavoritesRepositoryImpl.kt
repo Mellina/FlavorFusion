@@ -13,6 +13,10 @@ class FavoritesRepositoryImpl @Inject constructor(
         return favoriteLocalDataSource.getAll()
     }
 
+    override suspend fun isFavorite(recipeId: Long): Boolean {
+        return favoriteLocalDataSource.isFavorite(recipeId)
+    }
+
     override suspend fun saveFavorite(recipe: Recipe) {
         return favoriteLocalDataSource.save(recipe = recipe)
     }

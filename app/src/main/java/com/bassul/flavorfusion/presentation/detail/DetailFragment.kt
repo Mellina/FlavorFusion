@@ -58,8 +58,6 @@ class DetailFragment : Fragment() {
 
         loadDetailsAndObserveUiState(detailViewArg)
         setAndObserveFavoriteUiState(detailViewArg)
-
-
     }
 
     private fun loadDetailsAndObserveUiState(detailViewArg: DetailViewArg) {
@@ -101,21 +99,25 @@ class DetailFragment : Fragment() {
     }
 
     private fun setAndObserveFavoriteUiState(detailViewArg: DetailViewArg) {
-        binding.imageFavoriteIcon.setOnClickListener {
-            viewModel.favorite.update(detailViewArg)
-        }
+        viewModel.favorite.run {
+            checkFavorite(detailViewArg.id)
 
-        viewModel.favorite.state.observe(viewLifecycleOwner) { uiState ->
-            binding.flipperFavorite.displayedChild = when (uiState) {
-                FavoriteUiActionStateLiveData.UiState.Loading -> FLIPPER_FAVORITE_CHILD_POSITION_LOADING
-                is FavoriteUiActionStateLiveData.UiState.Icon -> {
-                    binding.imageFavoriteIcon.setImageResource(uiState.icon)
-                    FLIPPER_FAVORITE_CHILD_POSITION_IMAGE
-                }
+            binding.imageFavoriteIcon.setOnClickListener {
+                update(detailViewArg)
+            }
 
-                is FavoriteUiActionStateLiveData.UiState.Error -> {
-                    showShortToast(uiState.messageResId)
-                    FLIPPER_FAVORITE_CHILD_POSITION_IMAGE
+            state.observe(viewLifecycleOwner) { uiState ->
+                binding.flipperFavorite.displayedChild = when (uiState) {
+                    FavoriteUiActionStateLiveData.UiState.Loading -> FLIPPER_FAVORITE_CHILD_POSITION_LOADING
+                    is FavoriteUiActionStateLiveData.UiState.Icon -> {
+                        binding.imageFavoriteIcon.setImageResource(uiState.icon)
+                        FLIPPER_FAVORITE_CHILD_POSITION_IMAGE
+                    }
+
+                    is FavoriteUiActionStateLiveData.UiState.Error -> {
+                        showShortToast(uiState.messageResId)
+                        FLIPPER_FAVORITE_CHILD_POSITION_IMAGE
+                    }
                 }
             }
         }
