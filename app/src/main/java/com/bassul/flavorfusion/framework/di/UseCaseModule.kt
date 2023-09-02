@@ -6,6 +6,8 @@ import com.bassul.core.usecase.CheckFavoriteUseCase
 import com.bassul.core.usecase.CheckFavoriteUseCaseImpl
 import com.bassul.core.usecase.GetDetailsRecipeUseCase
 import com.bassul.core.usecase.GetDetailsRecipeUseCaseImpl
+import com.bassul.core.usecase.GetFavoritesUseCase
+import com.bassul.core.usecase.GetFavoritesUseCaseImpl
 import com.bassul.core.usecase.GetRecipesUseCase
 import com.bassul.core.usecase.GetRecipesUseCaseImpl
 import com.bassul.core.usecase.RemoveFavoriteUseCase
@@ -32,5 +34,8 @@ interface UseCaseModule {
     fun bindAddFavoriteUseCase(useCase: AddFavoriteUseCaseImpl): AddFavoriteUseCase
     @Binds
     fun bindRemoveFavoriteUseCase(useCase: RemoveFavoriteUseCaseImpl): RemoveFavoriteUseCase
+
+    @Binds
+    fun bindGetFavoriteUseCase(useCase: GetFavoritesUseCaseImpl): GetFavoritesUseCase
 
 }
