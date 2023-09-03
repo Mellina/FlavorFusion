@@ -1,14 +1,12 @@
-package com.bassul.flavorfusion.presentation.recipes
+package com.bassul.flavorfusion.presentation.recipes.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bassul.core.domain.model.Recipe
 import com.bassul.flavorfusion.databinding.ItemRecipeBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.util.OnRecipesItemClick
-import com.bumptech.glide.Glide
 import javax.inject.Inject
 
 class RecipesViewHolder @Inject constructor(

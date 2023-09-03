@@ -7,15 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.presentation.detail.DetailViewArg
+import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesAdapter
+import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesLoadMoreStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -99,24 +99,34 @@ class RecipesFragment : Fragment() {
         lifecycleScope.launch {
             recipesAdapter.loadStateFlow.collectLatest { loadState ->
 
-                binding.flipperRecipes.displayedChild = when (loadState.refresh) {
-                    is LoadState.Loading -> {
+                binding.flipperRecipes.displayedChild = when {
+
+                    loadState.mediator?.refresh is LoadState.Loading -> {
                         setShimmerVisibility(true)
                         FLIPPER_CHILD_LOADING
                     }
 
-                    is LoadState.NotLoading -> {
-                        setShimmerVisibility(false)
-                        FLIPPER_CHILD_CHARACTERS
-                    }
-
-                    is LoadState.Error -> {
+                    loadState.mediator?.refresh is LoadState.Error
+                            && recipesAdapter.itemCount == 0
+                    -> {
                         setShimmerVisibility(false)
                         binding.includeViewRecipesErrorState.buttonRetry.setOnClickListener {
                             recipesAdapter.retry()
                         }
                         FLIPPER_CHILD_ERROR
                     }
+
+                    loadState.source.refresh is LoadState.NotLoading
+                            || loadState.mediator?.refresh is LoadState.NotLoading -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
+                            }
+
+                    else -> {
+                        setShimmerVisibility(false)
+                        FLIPPER_CHILD_CHARACTERS
+                    }
+
                 }
             }
         }
