@@ -16,6 +16,7 @@ import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.presentation.detail.DetailViewArg
 import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesAdapter
 import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesLoadMoreStateAdapter
+import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesRefreshStateAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -26,6 +27,17 @@ class RecipesFragment : Fragment() {
 
     private var _binding: FragmentRecipesBinding? = null
     private val binding: FragmentRecipesBinding get() = _binding!!
+
+    private val viewModel: RecipesViewModel by viewModels()
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
+    private val headerAdapter: RecipesRefreshStateAdapter by lazy {
+        RecipesRefreshStateAdapter(
+            recipesAdapter::retry
+        )
+    }
 
     private val recipesAdapter: RecipesAdapter by lazy {
         RecipesAdapter(imageLoader) { recipe, view ->
@@ -43,10 +55,7 @@ class RecipesFragment : Fragment() {
         }
     }
 
-    private val viewModel: RecipesViewModel by viewModels()
 
-    @Inject
-    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,7 +92,8 @@ class RecipesFragment : Fragment() {
         postponeEnterTransition()
         with(binding.recyclerRecipes) {
             setHasFixedSize(true)
-            adapter = recipesAdapter.withLoadStateFooter(
+            adapter = recipesAdapter.withLoadStateHeaderAndFooter(
+                header = headerAdapter,
                 footer = RecipesLoadMoreStateAdapter(
                     retry = recipesAdapter::retry
                 )
@@ -98,6 +108,11 @@ class RecipesFragment : Fragment() {
     private fun observeInitialLoadState() {
         lifecycleScope.launch {
             recipesAdapter.loadStateFlow.collectLatest { loadState ->
+                headerAdapter.loadState = loadState.mediator
+                    ?.refresh
+                    ?.takeIf {
+                        it is LoadState.Error && recipesAdapter.itemCount > 0
+                    } ?: loadState.prepend
 
                 binding.flipperRecipes.displayedChild = when {
 
