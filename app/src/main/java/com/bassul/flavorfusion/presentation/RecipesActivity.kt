@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.ActivityRecipesBinding
@@ -20,6 +21,7 @@ class RecipesActivity : AppCompatActivity() {
 
         val binding = ActivityRecipesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setSupportActionBar(binding.toolbarApp)
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_post_container) as NavHostFragment
@@ -29,9 +31,10 @@ class RecipesActivity : AppCompatActivity() {
         binding.bottomNavMain.setupWithNavController(navController)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.recipesFragment, R.id.favoritesFragment)
+            setOf(R.id.recipesFragment, R.id.favoritesFragment, R.id.sortFragment)
         )
 
+        setupActionBarWithNavController(navController, appBarConfiguration)
         binding.toolbarApp.setupWithNavController(navController, appBarConfiguration)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->

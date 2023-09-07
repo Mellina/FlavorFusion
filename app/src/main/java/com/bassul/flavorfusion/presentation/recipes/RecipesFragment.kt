@@ -3,6 +3,9 @@ package com.bassul.flavorfusion.presentation.recipes
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -11,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentRecipesBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.presentation.detail.DetailViewArg
@@ -55,7 +59,10 @@ class RecipesFragment : Fragment() {
         }
     }
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -155,6 +162,19 @@ class RecipesFragment : Fragment() {
             } else {
                 stopShimmer()
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.recipes_menu_items, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.menu_sort -> {
+                findNavController().navigate(R.id.action_recipesFragment_to_sortFragment)
+                true
+            } else -> super.onOptionsItemSelected(item)
         }
     }
 
