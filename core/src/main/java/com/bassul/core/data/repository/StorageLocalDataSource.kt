@@ -6,5 +6,6 @@ interface StorageLocalDataSource {
 
     val sorting: Flow<String>
 
-    suspend fun saveSorting(sorting: String)
+    val sortingBy: Flow<String>
+    suspend fun saveSorting(sorting: Pair<String, String>)
 }

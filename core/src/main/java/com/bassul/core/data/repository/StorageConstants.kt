@@ -10,7 +10,5 @@ object StorageConstants {
     const val ORDER_BY_TIME = "time"
 
     const val SORT_ORDER_BY_KEY = "sort_order_by_key"
+    const val SORT_ORDER_KEY = "sort_order_key"
 }
-
-//sort
-//sortDirection

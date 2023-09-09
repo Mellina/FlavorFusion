@@ -21,15 +21,23 @@ class DataSourcePreferencesDataSource @Inject constructor(
         name = StorageConstants.DATA_STORE_NAME
     )
 
-    private val sortingKey = stringPreferencesKey(StorageConstants.SORT_ORDER_BY_KEY)
+    private val sortingKey = stringPreferencesKey(StorageConstants.SORT_ORDER_KEY)
+    private val sortingByKey = stringPreferencesKey(StorageConstants.SORT_ORDER_BY_KEY)
+
     override val sorting: Flow<String>
         get() = context.dataStore.data.map { store ->
             store[sortingKey] ?: ""
         }
 
-    override suspend fun saveSorting(sorting: String) {
+    override val sortingBy: Flow<String>
+        get() = context.dataStore.data.map { store ->
+            store[sortingByKey] ?: ""
+        }
+
+    override suspend fun saveSorting(sorting: Pair<String, String>) {
         context.dataStore.edit { store ->
-            store[sortingKey] = sorting
+            store[sortingKey] = sorting.first
+            store[sortingByKey] = sorting.second
         }
     }
 }

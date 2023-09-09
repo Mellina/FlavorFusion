@@ -13,7 +13,7 @@ import javax.inject.Inject
 interface SaveRecipesSortingUseCase {
 
     operator fun invoke(params: Params): Flow<ResultStatus<Unit>>
-    data class Params(val sorting: String)
+    data class Params(val sorting: Pair<String, String>)
 }
 
 class SaveRecipesSortingUseCaseImpl @Inject constructor(

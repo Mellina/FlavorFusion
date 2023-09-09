@@ -10,8 +10,10 @@ class StorageRepositoryImpl @Inject constructor(
 ) : StorageRepository {
     override val sorting: Flow<String>
         get() = storageLocalDataSource.sorting
+    override val sortingBy: Flow<String>
+        get() = storageLocalDataSource.sortingBy
 
-    override suspend fun saveSorting(sorting: String) {
+    override suspend fun saveSorting(sorting: Pair<String, String>) {
         storageLocalDataSource.saveSorting(sorting)
     }
 }
