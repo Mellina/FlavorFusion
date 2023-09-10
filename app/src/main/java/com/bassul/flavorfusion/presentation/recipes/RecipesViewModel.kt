@@ -24,13 +24,16 @@ class RecipesViewModel @Inject constructor(
     coroutinesDispatchers: CoroutinesDispatchers
 ) : ViewModel() {
 
+    var currentSearchQuery = ""
+
+
     private val action = MutableLiveData<Action>()
     val state: LiveData<UiState> = action
         .switchMap { action ->
             when (action) {
                 is Action.Search, Action.Sort -> {
                     getRecipesUseCase(
-                        GetRecipesUseCase.GetRecipesParams(""/*action.query*/, getPageConfig())
+                        GetRecipesUseCase.GetRecipesParams(currentSearchQuery, getPageConfig())
                     ).cachedIn(viewModelScope).map {
                         UiState.SearchResult(it)
                     }.asLiveData(coroutinesDispatchers.main())
@@ -48,8 +51,8 @@ class RecipesViewModel @Inject constructor(
         pageSize = 2
     )
 
-    fun searchRecipes(query: String = "") {
-        action.value = Action.Search(query)
+    fun searchRecipes() {
+        action.value = Action.Search
     }
 
     fun applySort() {
@@ -61,7 +64,7 @@ class RecipesViewModel @Inject constructor(
     }
 
     sealed class Action {
-        data class Search(val query: String) : Action()
+        object Search: Action()
         object Sort: Action()
     }
 }
