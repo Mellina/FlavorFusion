@@ -27,7 +27,21 @@ class RecipesFragment : Fragment() {
     private var _binding: FragmentRecipesBinding? = null
     private val binding: FragmentRecipesBinding get() = _binding!!
 
-    private lateinit var recipesAdapter: RecipesAdapter
+    private val recipesAdapter: RecipesAdapter by lazy {
+        RecipesAdapter(imageLoader) { recipe, view ->
+            val extras = FragmentNavigatorExtras(
+                view to recipe.title
+            )
+
+            val directions = RecipesFragmentDirections
+                .actionRecipesFragmentToDetailFragment(
+                    recipe.title,
+                    DetailViewArg(recipe.id, recipe.title, recipe.image)
+                )
+
+            findNavController().navigate(directions, extras)
+        }
+    }
 
     private val viewModel: RecipesViewModel by viewModels()
 
@@ -50,38 +64,34 @@ class RecipesFragment : Fragment() {
         initRecipesAdapter()
         observeInitialLoadState()
 
-        lifecycleScope.launch {
-            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.recipesPagingData("").collect { pagingData ->
-                    recipesAdapter.submitData(pagingData)
+        viewModel.state.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is RecipesViewModel.UiState.SearchResult -> {
+                    recipesAdapter.submitData(
+                        viewLifecycleOwner.lifecycle,
+                        uiState.data
+                    )
                 }
             }
+
         }
+
+        viewModel.searchRecipes()
     }
 
     private fun initRecipesAdapter() {
-        recipesAdapter = RecipesAdapter(imageLoader) { recipe, view ->
-            val extras = FragmentNavigatorExtras(
-                view to recipe.title
-            )
-
-            val directions = RecipesFragmentDirections
-                .actionRecipesFragmentToDetailFragment(
-                    recipe.title,
-                    DetailViewArg(recipe.id, recipe.title, recipe.image)
-                )
-
-            findNavController().navigate(directions, extras)
-        }
-
+        postponeEnterTransition()
         with(binding.recyclerRecipes) {
-            scrollToPosition(0)
             setHasFixedSize(true)
             adapter = recipesAdapter.withLoadStateFooter(
                 footer = RecipesLoadMoreStateAdapter(
                     retry = recipesAdapter::retry
                 )
             )
+            viewTreeObserver.addOnPreDrawListener {
+                startPostponedEnterTransition()
+                true
+            }
         }
     }
 
@@ -99,6 +109,7 @@ class RecipesFragment : Fragment() {
                         setShimmerVisibility(false)
                         FLIPPER_CHILD_CHARACTERS
                     }
+
                     is LoadState.Error -> {
                         setShimmerVisibility(false)
                         binding.includeViewRecipesErrorState.buttonRetry.setOnClickListener {

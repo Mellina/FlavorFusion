@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentDetailBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
+import com.bassul.flavorfusion.presentation.extensions.showShortToast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -55,13 +56,19 @@ class DetailFragment : Fragment() {
         }
         setSharedElementTransitionOnEnter()
 
-        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+        loadDetailsAndObserveUiState(detailViewArg)
+        setAndObserveFavoriteUiState(detailViewArg)
+    }
+
+    private fun loadDetailsAndObserveUiState(detailViewArg: DetailViewArg) {
+        viewModel.details.load(detailViewArg.id)
+        viewModel.details.state.observe(viewLifecycleOwner) { uiState ->
             binding.flipperDetails.displayedChild = when (uiState) {
-                DetailViewModel.UiState.Loading -> {
+                UiActionStateLiveData.UiState.Loading -> {
                     FLIPPER_CHILD_POSITION_LOADING
                 }
 
-                is DetailViewModel.UiState.Success -> {
+                is UiActionStateLiveData.UiState.Success -> {
                     uiState.detailsRecipe.toString()
 
                     ingredientsAdapter = IngredientsAdapter(imageLoader)
@@ -78,9 +85,9 @@ class DetailFragment : Fragment() {
                     FLIPPER_CHILD_POSITION_SUCCESS
                 }
 
-                is DetailViewModel.UiState.Error -> {
+                is UiActionStateLiveData.UiState.Error -> {
                     binding.includeErrorView.buttonRetry.setOnClickListener {
-                        viewModel.getDetailsRecipe(detailViewArg.id)
+                        viewModel.details.load(detailViewArg.id)
                     }
                     FLIPPER_CHILD_POSITION_ERROR
                 }
@@ -88,7 +95,34 @@ class DetailFragment : Fragment() {
 
         }
 
-        viewModel.getDetailsRecipe(detailViewArg.id)
+
+    }
+
+    private fun setAndObserveFavoriteUiState(detailViewArg: DetailViewArg) {
+        viewModel.favorite.run {
+            checkFavorite(detailViewArg.id)
+
+            binding.imageFavoriteIcon.setOnClickListener {
+                update(detailViewArg)
+            }
+
+            state.observe(viewLifecycleOwner) { uiState ->
+                binding.flipperFavorite.displayedChild = when (uiState) {
+                    FavoriteUiActionStateLiveData.UiState.Loading -> FLIPPER_FAVORITE_CHILD_POSITION_LOADING
+                    is FavoriteUiActionStateLiveData.UiState.Icon -> {
+                        binding.imageFavoriteIcon.setImageResource(uiState.icon)
+                        FLIPPER_FAVORITE_CHILD_POSITION_IMAGE
+                    }
+
+                    is FavoriteUiActionStateLiveData.UiState.Error -> {
+                        showShortToast(uiState.messageResId)
+                        FLIPPER_FAVORITE_CHILD_POSITION_IMAGE
+                    }
+                }
+            }
+        }
+
+
     }
 
     private fun setSharedElementTransitionOnEnter() {
@@ -107,6 +141,9 @@ class DetailFragment : Fragment() {
         private const val FLIPPER_CHILD_POSITION_LOADING = 0
         private const val FLIPPER_CHILD_POSITION_SUCCESS = 1
         private const val FLIPPER_CHILD_POSITION_ERROR = 2
+
+        private const val FLIPPER_FAVORITE_CHILD_POSITION_IMAGE = 0
+        private const val FLIPPER_FAVORITE_CHILD_POSITION_LOADING = 1
     }
 
 }
