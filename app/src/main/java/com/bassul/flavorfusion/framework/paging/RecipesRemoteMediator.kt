@@ -16,6 +16,8 @@ import javax.inject.Inject
 @OptIn(ExperimentalPagingApi::class)
 class RecipesRemoteMediator @Inject constructor(
     private val query: String,
+    private val order: String,
+    private val orderBy: String,
     private val database: AppDatabase,
     private val remoteDataSource: RecipesRemoteDataSource
 ) : RemoteMediator<Int, RecipeEntity>() {
@@ -53,6 +55,14 @@ class RecipesRemoteMediator @Inject constructor(
 
             if (query.isNotEmpty()) {
                 queries["query"] = query
+            }
+
+            if (order.isNotEmpty()) {
+                queries["sortDirection"] = order
+            }
+
+            if (orderBy.isNotEmpty()) {
+                queries["sort"] = orderBy
             }
 
             val recipePaging = remoteDataSource.fetchRecipes(queries)

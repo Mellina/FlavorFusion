@@ -26,12 +26,11 @@ class RecipesViewModel @Inject constructor(
 
     private val action = MutableLiveData<Action>()
     val state: LiveData<UiState> = action
-        .distinctUntilChanged()
         .switchMap { action ->
             when (action) {
-                is Action.Search -> {
+                is Action.Search, Action.Sort -> {
                     getRecipesUseCase(
-                        GetRecipesUseCase.GetRecipesParams(action.query, getPageConfig())
+                        GetRecipesUseCase.GetRecipesParams(""/*action.query*/, getPageConfig())
                     ).cachedIn(viewModelScope).map {
                         UiState.SearchResult(it)
                     }.asLiveData(coroutinesDispatchers.main())
@@ -53,11 +52,16 @@ class RecipesViewModel @Inject constructor(
         action.value = Action.Search(query)
     }
 
+    fun applySort() {
+        action.value = Action.Sort
+    }
+
     sealed class UiState {
         data class SearchResult(val data: PagingData<Recipe>): UiState()
     }
 
     sealed class Action {
         data class Search(val query: String) : Action()
+        object Sort: Action()
     }
 }

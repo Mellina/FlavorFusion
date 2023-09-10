@@ -10,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
@@ -21,6 +23,7 @@ import com.bassul.flavorfusion.presentation.detail.DetailViewArg
 import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesAdapter
 import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesLoadMoreStateAdapter
 import com.bassul.flavorfusion.presentation.recipes.adapters.RecipesRefreshStateAdapter
+import com.bassul.flavorfusion.presentation.sort.SortFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -79,6 +82,7 @@ class RecipesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initRecipesAdapter()
         observeInitialLoadState()
+        observeSortingData()
 
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
@@ -163,6 +167,31 @@ class RecipesFragment : Fragment() {
                 stopShimmer()
             }
         }
+    }
+
+    private fun observeSortingData() {
+        val navBackStackEntry = findNavController().getBackStackEntry(R.id.recipesFragment)
+        val observer = LifecycleEventObserver { _, event ->
+            val isSortingApplied = navBackStackEntry.savedStateHandle.contains(
+                SortFragment.SORTING_APPLIED_BASK_STACK_KEY
+            )
+
+            if (event == Lifecycle.Event.ON_RESUME && isSortingApplied) {
+                viewModel.applySort()
+                navBackStackEntry.savedStateHandle.remove<Boolean>(
+                    SortFragment.SORTING_APPLIED_BASK_STACK_KEY
+                )
+            }
+        }
+        
+        navBackStackEntry.lifecycle.addObserver(observer)
+        
+        viewLifecycleOwner.lifecycle.addObserver(LifecycleEventObserver { _, event ->
+        if (event == Lifecycle.Event.ON_DESTROY) {
+            navBackStackEntry.lifecycle.removeObserver(observer)
+        }
+
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

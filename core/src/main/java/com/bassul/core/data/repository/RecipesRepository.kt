@@ -11,7 +11,10 @@ interface RecipesRepository {
 
     fun getRecipes(query: String): PagingSource<Int, Recipe>
 
-    fun getCachedRecipes(query: String, pagingConfig: PagingConfig): Flow<PagingData<Recipe>>
+    fun getCachedRecipes(query: String,
+                         order: String,
+                         orderBy: String,
+                         pagingConfig: PagingConfig): Flow<PagingData<Recipe>>
 
     suspend fun getDetailsRecipe(recipeId: Long): RecipeDetails
 }

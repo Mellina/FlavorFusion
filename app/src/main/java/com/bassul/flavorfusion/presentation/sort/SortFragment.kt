@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.forEach
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.bassul.core.data.repository.StorageConstants.ORDER_ASCENDING
 import com.bassul.core.data.repository.StorageConstants.ORDER_BY_CALORIES
 import com.bassul.core.data.repository.StorageConstants.ORDER_BY_HEALTHINESS
@@ -59,7 +60,7 @@ class SortFragment : BottomSheetDialogFragment() {
 
         binding.buttonApplySort.setOnClickListener {
             viewModel.applySorting(orderBy, order)
-            dismiss()
+           // dismiss()
         }
     }
 
@@ -92,6 +93,16 @@ class SortFragment : BottomSheetDialogFragment() {
                 }
 
                 is SortViewModel.UiState.ApplyState.Success -> {
+
+
+                    findNavController().run {
+                        previousBackStackEntry?.savedStateHandle?.set(
+                            SORTING_APPLIED_BASK_STACK_KEY,
+                            true
+                        )
+
+                        popBackStack()
+                    }
                     binding.flipperApply.displayedChild = FLIPPER_CHILD_BUTTON
                 }
 
@@ -125,5 +136,6 @@ class SortFragment : BottomSheetDialogFragment() {
     companion object {
         private const val FLIPPER_CHILD_BUTTON = 0
         private const val FLIPPER_CHILD_PROGRESS = 1
+        const val SORTING_APPLIED_BASK_STACK_KEY = "sortingAppliedBaskStackKey"
     }
 }
