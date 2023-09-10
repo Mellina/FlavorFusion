@@ -40,7 +40,8 @@ class RecipesViewModelTest {
 
     @Before
     fun setUp() {
-        recipesViewModel = RecipesViewModel(getRecipesUseCase)
+        recipesViewModel = RecipesViewModel(getRecipesUseCase,
+            mainCoroutineRule.testDispatcherProvider)
     }
 
     @Test
