@@ -1,10 +1,8 @@
-package com.bassul.flavorfusion.presentation.recipes
+package com.bassul.flavorfusion.presentation.recipes.adapters
 
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import com.bassul.core.domain.model.Recipe
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.util.OnRecipesItemClick

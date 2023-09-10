@@ -1,6 +1,5 @@
 package com.bassul.core.usecase
 
-import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.bassul.core.data.repository.RecipesRepository
@@ -21,9 +20,7 @@ class GetRecipesUseCaseImpl @Inject constructor(
 ) : GetRecipesUseCase, PagingUseCase<GetRecipesParams, Recipe>() {
 
     override fun createFlowObservable(params: GetRecipesParams): Flow<PagingData<Recipe>> {
-        return Pager(config = params.pagingConfig) {
-            recipesRepository.getRecipes(params.query)
-        }.flow
+        return recipesRepository.getCachedRecipes(params.query, params.pagingConfig)
     }
 
 

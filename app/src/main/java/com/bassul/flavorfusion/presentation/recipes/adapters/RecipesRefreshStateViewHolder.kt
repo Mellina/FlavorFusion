@@ -1,4 +1,4 @@
-package com.bassul.flavorfusion.presentation.recipes
+package com.bassul.flavorfusion.presentation.recipes.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,13 +6,14 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.RecyclerView
 import com.bassul.flavorfusion.databinding.ItemRecipeLoadMoreStateBinding
+import com.bassul.flavorfusion.databinding.ItemRecipeRefreshStateBinding
 
-class RecipesLoadMoreStateViewHolder(
-    itemBinding: ItemRecipeLoadMoreStateBinding,
+class RecipesRefreshStateViewHolder(
+    itemBinding: ItemRecipeRefreshStateBinding,
     retry: () -> Unit
 ) : RecyclerView.ViewHolder(itemBinding.root) {
 
-    private val binding = ItemRecipeLoadMoreStateBinding.bind(itemView)
+    private val binding = ItemRecipeRefreshStateBinding.bind(itemView)
     private val progressBarLoadingMore = binding.progressLoadingMore
     private val textTryAgainMessage = binding.textTryAgain.also {
         it.setOnClickListener { retry() }
@@ -24,11 +25,11 @@ class RecipesLoadMoreStateViewHolder(
     }
 
     companion object {
-        fun create(parent: ViewGroup, retry: () -> Unit): RecipesLoadMoreStateViewHolder {
-            val itemBinding = ItemRecipeLoadMoreStateBinding
+        fun create(parent: ViewGroup, retry: () -> Unit): RecipesRefreshStateViewHolder {
+            val itemBinding = ItemRecipeRefreshStateBinding
                 .inflate(LayoutInflater.from(parent.context), parent, false)
 
-            return RecipesLoadMoreStateViewHolder(itemBinding, retry)
+            return RecipesRefreshStateViewHolder(itemBinding, retry)
         }
     }
 }
