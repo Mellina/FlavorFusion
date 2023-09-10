@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.FlavorFusion" parent="Theme.MaterialComponents.DayNight.NoActionBar" />
+    <style name="Theme.FlavorFusion" parent="Theme.MaterialComponents.DayNight.NoActionBar" >
+        <item name="chipStyle">@style/Chip</item>
+
+</style>
+    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/chip_background_color
+        </item>
+        <item name="android:textColor">@color/chip_text_color</item>
+        <item name="checkedIconTint">@color/chip_text_color</item>
+    </style>
+
 </resources>

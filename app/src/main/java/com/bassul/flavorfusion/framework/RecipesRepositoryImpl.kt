@@ -30,11 +30,13 @@ class RecipesRepositoryImpl @Inject constructor(
 
     override fun getCachedRecipes(
         query: String,
+        order: String,
+        orderBy: String,
         pagingConfig: PagingConfig
     ): Flow<PagingData<Recipe>> {
         return Pager(
             config = pagingConfig,
-            remoteMediator = RecipesRemoteMediator(query, database = database, remoteDataSource)
+            remoteMediator = RecipesRemoteMediator(query, order, orderBy, database = database, remoteDataSource)
         ) {
             database.recipeDao().pagingSource()
         }.flow.map { pagingData ->
