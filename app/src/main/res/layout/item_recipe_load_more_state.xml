@@ -14,7 +14,7 @@
         android:paddingEnd="16dp"
         android:paddingTop="24dp"
         android:paddingBottom="24dp"
-        android:textColor="@color/white"
+        android:textColor="@color/text_light"
         android:layout_height="wrap_content"/>
 
     <ProgressBar

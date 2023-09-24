@@ -10,7 +10,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sort By"
-        android:textColor="@color/black"
+        android:textColor="@color/text_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,12 +34,6 @@
             android:text="Popularity" />
 
         <com.google.android.material.chip.Chip
-            android:id="@+id/chip_healthiness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Healthiness" />
-
-        <com.google.android.material.chip.Chip
             android:id="@+id/chip_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Sort Order"
-        android:textColor="@color/black"
+        android:textColor="@color/text_dark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/chip_group_order_by"
@@ -102,9 +96,9 @@
             android:id="@+id/button_apply_sort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="?attr/colorPrimary"
-            android:textColor="@color/white"
-            android:text="Apply" />
+            android:text="Apply"
+            android:textColor="@color/text_light"
+            app:backgroundTint="?attr/colorPrimary" />
 
         <ProgressBar
             android:id="@+id/progress_sort"

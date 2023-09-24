@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:importantForAccessibility="no"
-            tools:srcCompat="@drawable/ic_launcher_foreground" />
+            tools:srcCompat="@drawable/ic_favorite_unchecked" />
 
         <ProgressBar
             android:layout_width="30dp"
@@ -48,68 +48,56 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_recipe">
 
-        <include layout="@layout/include_view_details_loading_state" />
-
+           <include layout="@layout/include_view_details_loading_state" />
         <!-- Separar o layout com os dados em outro layout e jogar aqui como include para ficar mais organizado -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <TextView
-                android:id="@+id/title_recipe"
+                android:id="@+id/amount_server"
+                style="@style/Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Pasta"
+                android:drawableLeft="@drawable/ic_people"
+                android:drawableTint="@color/detail"
+                android:drawablePadding="4dp"
+                android:text="5"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/ready_in_minutes"
+                style="@style/Body1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_time"
+                android:drawableTint="@color/detail"
+                android:text="60 minutes"
+                android:drawablePadding="4dp"
+                app:layout_constraintStart_toEndOf="@+id/amount_server"
+                app:layout_constraintTop_toTopOf="@+id/amount_server" />
+
+            <TextView
                 android:id="@+id/title_dish_type"
+                style="@style/Title2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dish Type: "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_recipe" />
-
-            <TextView
-                android:id="@+id/dish_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="* lunch *main course"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_dish_type" />
-
-            <TextView
-                android:id="@+id/title_amount_server"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Server: "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dish_type" />
-
-            <TextView
-                android:id="@+id/amount_server"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="5 "
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_amount_server" />
-
-            <TextView
-                android:id="@+id/title_ready_in_minutes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ready In Minutes"
+                android:text="Dish Type"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/amount_server" />
 
             <TextView
-                android:id="@+id/ready_in_minutes"
+                android:id="@+id/dish_type"
+                style="@style/Body1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="60 minutes"
+                android:text="* lunch *main *course"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title_ready_in_minutes" />
+                app:layout_constraintTop_toBottomOf="@+id/title_dish_type" />
+
 
             <include
                 android:id="@+id/ingredients"
@@ -117,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/ready_in_minutes" />
+                app:layout_constraintTop_toBottomOf="@+id/dish_type" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include

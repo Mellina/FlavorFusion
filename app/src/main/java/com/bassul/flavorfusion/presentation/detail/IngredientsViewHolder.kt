@@ -19,7 +19,7 @@ class IngredientsViewHolder @Inject constructor(
     private val name = itemIngredientBinding.nameItemIngredient
 
     fun bind(ingredient: ExtendedIngredient) {
-        amount.text = ingredient.amount.toString()+ingredient.unit
+        amount.text = ingredient.amount.toString()+" "+ingredient.unit
         image.transitionName = ingredient.image
         imageLoader.load(
             image,

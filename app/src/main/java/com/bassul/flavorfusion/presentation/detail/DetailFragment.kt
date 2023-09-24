@@ -2,10 +2,10 @@ package com.bassul.flavorfusion.presentation.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -52,8 +52,15 @@ class DetailFragment : Fragment() {
                 this,
                 detailViewArg.imageUrl,
                 R.drawable.ic_launcher_background
-            )//provisório - colocar imagem de erro ao carregar
+            )//TODO: provisório - colocar imagem de erro ao carregar
         }
+
+        //TODO: Preencher dish types
+        val textWithMarkers = StringBuilder()
+        textWithMarkers.append("• This is the first line\n")
+        textWithMarkers.append("• This is the second line\n")
+        textWithMarkers.append("• This is the last line")
+        binding.dishType.setText(textWithMarkers)
         setSharedElementTransitionOnEnter()
 
         loadDetailsAndObserveUiState(detailViewArg)

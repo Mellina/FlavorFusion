@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.bassul.flavorfusion.presentation.recipes.RecipesFragment"
-        android:label="fragment_recipes"
+        android:label="Flavor Fusion"
         tools:layout="@layout/fragment_recipes" >
         <action
             android:id="@+id/action_recipesFragment_to_detailFragment"
