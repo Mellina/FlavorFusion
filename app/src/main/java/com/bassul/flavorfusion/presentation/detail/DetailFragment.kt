@@ -51,8 +51,8 @@ class DetailFragment : Fragment() {
             imageLoader.load(
                 this,
                 detailViewArg.imageUrl,
-                R.drawable.ic_launcher_background
-            )//TODO: provisório - colocar imagem de erro ao carregar
+                R.drawable.ic_broken_image
+            )
         }
 
         setSharedElementTransitionOnEnter()

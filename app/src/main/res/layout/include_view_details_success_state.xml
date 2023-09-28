@@ -15,7 +15,7 @@
             style="@style/Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_small"
             android:drawablePadding="@dimen/drawable_padding"
             app:drawableLeftCompat="@drawable/ic_people"
             app:drawableTint="@color/detail"
@@ -58,7 +58,7 @@
             layout="@layout/list_ingredient"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="@dimen/margin_medium"
             app:layout_constraintTop_toBottomOf="@+id/dish_type" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

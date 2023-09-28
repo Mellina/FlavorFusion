@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bassul.core.domain.model.ExtendedIngredient
 import com.bassul.flavorfusion.databinding.ItemIngredientBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
+import java.util.Locale
 import javax.inject.Inject
 
 class IngredientsViewHolder @Inject constructor(
@@ -19,7 +20,7 @@ class IngredientsViewHolder @Inject constructor(
     private val name = itemIngredientBinding.nameItemIngredient
 
     fun bind(ingredient: ExtendedIngredient) {
-        amount.text = ingredient.amount.toString()+" "+ingredient.unit
+        amount.text = String.format(Locale.getDefault(), AMOUNT_FORMAT, ingredient.amount, ingredient.unit)
         image.transitionName = ingredient.image
         imageLoader.load(
             image,
@@ -38,5 +39,7 @@ class IngredientsViewHolder @Inject constructor(
             val itemBinding = ItemIngredientBinding.inflate(inflater, parent, false)
             return IngredientsViewHolder(imageLoader, itemBinding)
         }
+
+        const val AMOUNT_FORMAT = "%.2f %s"
     }
 }

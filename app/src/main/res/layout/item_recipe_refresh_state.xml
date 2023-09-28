@@ -9,11 +9,11 @@
         android:layout_height="wrap_content"
         android:text="@string/offline_error"
         android:textAlignment="center"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="@dimen/margin_medium"
+        android:paddingEnd="@dimen/margin_medium"
         android:background="@android:color/darker_gray"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_large"
         android:textColor="@color/text_dark" />
 
     <ProgressBar

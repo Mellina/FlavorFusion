@@ -10,10 +10,10 @@
         android:text="@string/error_load_next_page_try_again"
         android:textAlignment="center"
         android:background="@android:color/darker_gray"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp"
+        android:paddingStart="@dimen/margin_medium"
+        android:paddingEnd="@dimen/margin_medium"
+        android:paddingTop="@dimen/margin_large"
+        android:paddingBottom="@dimen/margin_large"
         android:textColor="@color/text_light"
         android:layout_height="wrap_content"/>
 
