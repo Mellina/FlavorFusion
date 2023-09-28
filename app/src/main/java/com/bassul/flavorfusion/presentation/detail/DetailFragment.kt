@@ -55,12 +55,6 @@ class DetailFragment : Fragment() {
             )//TODO: provisório - colocar imagem de erro ao carregar
         }
 
-        //TODO: Preencher dish types
-        val textWithMarkers = StringBuilder()
-        textWithMarkers.append("• This is the first line\n")
-        textWithMarkers.append("• This is the second line\n")
-        textWithMarkers.append("• This is the last line")
-        binding.dishType.setText(textWithMarkers)
         setSharedElementTransitionOnEnter()
 
         loadDetailsAndObserveUiState(detailViewArg)
@@ -78,16 +72,18 @@ class DetailFragment : Fragment() {
                 is UiActionStateLiveData.UiState.Success -> {
                     uiState.detailsRecipe.toString()
 
-                    ingredientsAdapter = IngredientsAdapter(imageLoader)
-                    lifecycleScope.launch {
-                        viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                            ingredientsAdapter.submitList(uiState.detailsRecipe.extendedIngredients)
-                        }
-                    }
-                    binding.ingredients.listIngredients.run {
-                        setHasFixedSize(true)
-                        adapter = ingredientsAdapter
-                    }
+                    binding.includeViewDetailsSuccessState.amountServer.text =
+                        uiState.detailsRecipe.servings.toString()
+
+                    binding.includeViewDetailsSuccessState.readyInMinutes.text =
+                        context?.resources?.getQuantityString(
+                            R.plurals.ready_in_minutes,
+                            uiState.detailsRecipe.readyInMinutes,
+                            uiState.detailsRecipe.readyInMinutes,
+                        )
+
+                    setDishTypes(uiState)
+                    setIngredientsList(uiState)
 
                     FLIPPER_CHILD_POSITION_SUCCESS
                 }
@@ -99,10 +95,31 @@ class DetailFragment : Fragment() {
                     FLIPPER_CHILD_POSITION_ERROR
                 }
             }
+        }
+    }
 
+    private fun setDishTypes(uiState: UiActionStateLiveData.UiState.Success) {
+        val dishTypes = StringBuilder()
+        uiState.detailsRecipe.dishTypes.forEach { dishType ->
+            //TODO: Remover isso para um utils?
+            val dishTypeCapitalized = dishType.replaceFirstChar { it.uppercaseChar() }
+            dishTypes.append("• $dishTypeCapitalized\n")
         }
 
+        binding.includeViewDetailsSuccessState.dishType.text = dishTypes
+    }
 
+    private fun setIngredientsList(uiState: UiActionStateLiveData.UiState.Success) {
+        ingredientsAdapter = IngredientsAdapter(imageLoader)
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                ingredientsAdapter.submitList(uiState.detailsRecipe.extendedIngredients)
+            }
+        }
+        binding.includeViewDetailsSuccessState.ingredients.listIngredients.run {
+            setHasFixedSize(true)
+            adapter = ingredientsAdapter
+        }
     }
 
     private fun setAndObserveFavoriteUiState(detailViewArg: DetailViewArg) {

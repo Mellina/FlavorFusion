@@ -7,7 +7,7 @@
         android:id="@+id/text_try_again"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="You are offline. Check your internet connection and try again"
+        android:text="@string/offline_error"
         android:textAlignment="center"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"

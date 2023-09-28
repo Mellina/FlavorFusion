@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_margin="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/text_order_by_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sort By"
+        android:text="@string/sort_by"
         android:textColor="@color/text_dark"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -31,19 +31,19 @@
             android:id="@+id/chip_popularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Popularity" />
+            android:text="@string/popularity" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="calories" />
+            android:text="@string/calories" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time" />
+            android:text="@string/time" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -51,7 +51,7 @@
         android:id="@+id/text_order_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sort Order"
+        android:text="@string/sort_order"
         android:textColor="@color/text_dark"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -73,13 +73,13 @@
             android:id="@+id/chip_ascending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ascending" />
+            android:text="@string/ascending" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_descending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descending" />
+            android:text="@string/descending" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -87,7 +87,7 @@
         android:id="@+id/flipper_apply"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chip_group_order">
@@ -96,14 +96,14 @@
             android:id="@+id/button_apply_sort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Apply"
+            android:text="@string/apply"
             android:textColor="@color/text_light"
             app:backgroundTint="?attr/colorPrimary" />
 
         <ProgressBar
             android:id="@+id/progress_sort"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:layout_gravity="center" />
 
     </ViewFlipper>

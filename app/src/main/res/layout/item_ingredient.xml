@@ -2,13 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginHorizontal="@dimen/margin_small"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/image_item_ingredient"
-        android:layout_width="90dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/image_ingredient_width"
+        android:layout_height="@dimen/image_ingredient_height"
         android:scaleType="centerInside"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,7 +20,6 @@
         android:id="@+id/name_item_ingredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="4dp"
         tools:text="Oil"
         style="@style/BodyIngredients"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,7 +32,6 @@
         android:layout_height="wrap_content"
         tools:text="1.0 cup"
         style="@style/BodyIngredients"
-        android:layout_marginHorizontal="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/name_item_ingredient" />
