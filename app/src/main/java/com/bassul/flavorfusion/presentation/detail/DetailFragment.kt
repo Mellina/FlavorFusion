@@ -101,7 +101,7 @@ class DetailFragment : Fragment() {
     private fun setDishTypes(uiState: UiActionStateLiveData.UiState.Success) {
         val dishTypes = StringBuilder()
         uiState.detailsRecipe.dishTypes.forEach { dishType ->
-            //TODO: Remover isso para um utils?
+
             val dishTypeCapitalized = dishType.replaceFirstChar { it.uppercaseChar() }
             dishTypes.append("• $dishTypeCapitalized\n")
         }

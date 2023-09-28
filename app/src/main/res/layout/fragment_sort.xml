@@ -97,7 +97,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/apply"
-            android:textColor="@color/text_light"
+            android:textColor="@color/light_blue"
             app:backgroundTint="?attr/colorPrimary" />
 
         <ProgressBar
