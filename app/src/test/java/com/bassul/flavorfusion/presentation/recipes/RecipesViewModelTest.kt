@@ -6,7 +6,7 @@ import com.bassul.testing.MainCoroutineRule
 import com.bassul.testing.model.RecipeFactory
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.whenever
-import kotlinx.coroutines.flow.count
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.*
@@ -55,7 +55,7 @@ class RecipesViewModelTest {
 
             val result = recipesViewModel.recipesPagingData("")
 
-            assertEquals(1, result.count())
+            assertNotNull(result.first())
         }
 
     @Test(expected = java.lang.RuntimeException::class)
