@@ -9,8 +9,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface RecipesRepository {
 
-    fun getRecipes(query: String): PagingSource<Int, Recipe>
-
     fun getCachedRecipes(query: String,
                          order: String,
                          orderBy: String,
