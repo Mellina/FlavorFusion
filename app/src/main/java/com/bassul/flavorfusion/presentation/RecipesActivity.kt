@@ -42,7 +42,7 @@ class RecipesActivity : AppCompatActivity() {
                 appBarConfiguration.topLevelDestinations.contains(destination.id)
             if (!isTopLevelDestination) {
                 binding.toolbarApp
-                    .setNavigationIcon(drawable.material_ic_keyboard_arrow_previous_black_24dp)
+                    .setNavigationIcon(drawable.ic_arrow_back_black_24)
             }
         }
 

@@ -20,6 +20,6 @@
     <dimen name="margin_large">24dp</dimen>
 
     <dimen name="font_title">18sp</dimen>
-    <dimen name="font_subtitle">18sp</dimen>
+    <dimen name="font_subtitle">32sp</dimen>
 
 </resources>

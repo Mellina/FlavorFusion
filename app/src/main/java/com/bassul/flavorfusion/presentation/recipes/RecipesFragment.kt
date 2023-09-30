@@ -9,6 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.MenuProvider
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
@@ -31,7 +32,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
+class RecipesFragment : Fragment(), MenuProvider,  SearchView.OnQueryTextListener,
     MenuItem.OnActionExpandListener {
 
     private var _binding: FragmentRecipesBinding? = null
@@ -66,11 +67,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -87,6 +83,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         initRecipesAdapter()
         observeInitialLoadState()
         observeSortingData()
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         viewModel.state.observe(viewLifecycleOwner) { uiState ->
             when (uiState) {
@@ -196,8 +194,8 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.recipes_menu_items, menu)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.recipes_menu_items, menu)
 
         val searchItem = menu.findItem(R.id.menu_search)
         searchView = searchItem.actionView as SearchView
@@ -214,14 +212,14 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        return when (menuItem.itemId) {
             R.id.menu_sort -> {
                 findNavController().navigate(R.id.action_recipesFragment_to_sortFragment)
                 true
             }
 
-            else -> super.onOptionsItemSelected(item)
+            else -> false
         }
     }
 
@@ -258,4 +256,5 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         private const val FLIPPER_CHILD_CHARACTERS = 1
         private const val FLIPPER_CHILD_ERROR = 2
     }
+
 }
