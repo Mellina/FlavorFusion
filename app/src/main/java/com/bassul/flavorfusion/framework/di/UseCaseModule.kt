@@ -8,10 +8,14 @@ import com.bassul.core.usecase.GetDetailsRecipeUseCase
 import com.bassul.core.usecase.GetDetailsRecipeUseCaseImpl
 import com.bassul.core.usecase.GetFavoritesUseCase
 import com.bassul.core.usecase.GetFavoritesUseCaseImpl
+import com.bassul.core.usecase.GetRecipesSortingUseCase
+import com.bassul.core.usecase.GetRecipesSortingUseCaseImpl
 import com.bassul.core.usecase.GetRecipesUseCase
 import com.bassul.core.usecase.GetRecipesUseCaseImpl
 import com.bassul.core.usecase.RemoveFavoriteUseCase
 import com.bassul.core.usecase.RemoveFavoriteUseCaseImpl
+import com.bassul.core.usecase.SaveRecipesSortingUseCase
+import com.bassul.core.usecase.SaveRecipesSortingUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -32,10 +36,16 @@ interface UseCaseModule {
 
     @Binds
     fun bindAddFavoriteUseCase(useCase: AddFavoriteUseCaseImpl): AddFavoriteUseCase
+
     @Binds
     fun bindRemoveFavoriteUseCase(useCase: RemoveFavoriteUseCaseImpl): RemoveFavoriteUseCase
 
     @Binds
     fun bindGetFavoriteUseCase(useCase: GetFavoritesUseCaseImpl): GetFavoritesUseCase
 
+    @Binds
+    fun bindGetRecipesSortingUseCase(useCase: GetRecipesSortingUseCaseImpl): GetRecipesSortingUseCase
+
+    @Binds
+    fun bindSaveRecipesSortingUseCase(useCase: SaveRecipesSortingUseCaseImpl): SaveRecipesSortingUseCase
 }

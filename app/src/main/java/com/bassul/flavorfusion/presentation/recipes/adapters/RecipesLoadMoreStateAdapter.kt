@@ -1,4 +1,4 @@
-package com.bassul.flavorfusion.presentation.recipes
+package com.bassul.flavorfusion.presentation.recipes.adapters
 
 import android.view.ViewGroup
 import androidx.paging.LoadState
