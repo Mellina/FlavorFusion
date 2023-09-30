@@ -36,5 +36,6 @@
     <string name="error_load_next_page_try_again">Error when trying to load the next page. Try again</string>
     <string name="offline_error">You are offline. Check your internet connection and try again</string>
     <string name="favorites">Favorites</string>
+    <string name="ingredient_picture">Ingredient picture</string>
 
 </resources>
