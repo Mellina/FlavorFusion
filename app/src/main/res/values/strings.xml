@@ -8,7 +8,7 @@
     <!--Sort Options-->
     <string name="sort_by">Sort By</string>
     <string name="popularity">Popularity</string>
-    <string name="calories">calories</string>
+    <string name="calories">Calories</string>
     <string name="time">Time</string>
     <string name="sort_order">Sort Order</string>
     <string name="ascending">Ascending</string>
@@ -29,7 +29,7 @@
     <string name="empty_favorites">No favorites</string>
 
     <!--Error -->
-    <string name="error_to_load_datas">Error to load datas</string>
+    <string name="error_to_load_data">Error to load data</string>
     <string name="error_to_add_favorite">Error to add to favorites</string>
     <string name="error_to_remove_favorite">Error to remove to favorites</string>
     <string name="try_again">Try again</string>
