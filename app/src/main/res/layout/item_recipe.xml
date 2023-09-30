@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/card_recipe"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="4dp"
-    android:layout_height="230dp">
+    android:layout_margin="@dimen/margin_small"
+    app:cardCornerRadius="@dimen/corner_radius"
+    android:layout_height="@dimen/card_recipe_height">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         <ImageView
             android:id="@+id/image_recipe"
             android:layout_width="0dp"
-            android:layout_height="170dp"
+            android:layout_height="@dimen/image_card_recipe_height"
             android:importantForAccessibility="no"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -27,11 +27,12 @@
             android:id="@+id/text_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="12dp"
-            tools:text="Macarrão"
+            android:layout_marginStart="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_medium"
+            tools:text="Pasta"
             android:maxLines="1"
             android:ellipsize="end"
+            style="@style/Body1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

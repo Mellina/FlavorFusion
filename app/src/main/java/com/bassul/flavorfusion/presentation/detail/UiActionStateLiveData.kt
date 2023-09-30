@@ -12,7 +12,6 @@ import kotlin.coroutines.CoroutineContext
 class UiActionStateLiveData(
     private val coroutineContext: CoroutineContext,
     private val getDetailsRecipeUseCase: GetDetailsRecipeUseCase
-
 ) {
 
     private val action = MutableLiveData<Action>()

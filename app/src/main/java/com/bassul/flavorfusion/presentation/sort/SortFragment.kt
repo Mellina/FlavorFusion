@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.bassul.core.data.repository.StorageConstants.ORDER_ASCENDING
 import com.bassul.core.data.repository.StorageConstants.ORDER_BY_CALORIES
-import com.bassul.core.data.repository.StorageConstants.ORDER_BY_HEALTHINESS
 import com.bassul.core.data.repository.StorageConstants.ORDER_BY_POPULARITY
 import com.bassul.core.data.repository.StorageConstants.ORDER_BY_TIME
 import com.bassul.core.data.repository.StorageConstants.ORDER_DESCENDING
@@ -60,7 +59,6 @@ class SortFragment : BottomSheetDialogFragment() {
 
         binding.buttonApplySort.setOnClickListener {
             viewModel.applySorting(orderBy, order)
-           // dismiss()
         }
     }
 
@@ -100,7 +98,6 @@ class SortFragment : BottomSheetDialogFragment() {
                             SORTING_APPLIED_BASK_STACK_KEY,
                             true
                         )
-
                         popBackStack()
                     }
                     binding.flipperApply.displayedChild = FLIPPER_CHILD_BUTTON
@@ -122,7 +119,6 @@ class SortFragment : BottomSheetDialogFragment() {
 
     private fun getOrderByValue(chipId: Int): String = when (chipId) {
         R.id.chip_popularity -> ORDER_BY_POPULARITY
-        R.id.chip_healthiness -> ORDER_BY_HEALTHINESS
         R.id.chip_calories -> ORDER_BY_CALORIES
         R.id.chip_time -> ORDER_BY_TIME
         else -> ORDER_ASCENDING

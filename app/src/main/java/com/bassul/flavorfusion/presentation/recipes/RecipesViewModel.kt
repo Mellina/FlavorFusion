@@ -26,7 +26,6 @@ class RecipesViewModel @Inject constructor(
 
     var currentSearchQuery = ""
 
-
     private val action = MutableLiveData<Action>()
     val state: LiveData<UiState> = action
         .switchMap { action ->

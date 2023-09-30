@@ -23,11 +23,6 @@ class RecipesRepositoryImpl @Inject constructor(
     private val database: AppDatabase
 ) : RecipesRepository {
 
-    override fun getRecipes(query: String): PagingSource<Int, Recipe> {
-        return RecipesPagingSource(remoteDataSource, query)
-    }
-
-
     override fun getCachedRecipes(
         query: String,
         order: String,
@@ -47,13 +42,11 @@ class RecipesRepositoryImpl @Inject constructor(
                     it.imageUrl
                 )
             }
-
         }
     }
 
     override suspend fun getDetailsRecipe(recipeId: Long): RecipeDetails {
         return remoteDataSource.fetchRecipeDetails(recipeId)
     }
-
 
 }

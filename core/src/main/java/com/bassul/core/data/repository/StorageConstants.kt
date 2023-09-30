@@ -5,7 +5,6 @@ object StorageConstants {
     const val ORDER_ASCENDING = "asc"
     const val ORDER_DESCENDING = "desc"
     const val ORDER_BY_POPULARITY = "popularity"
-    const val ORDER_BY_HEALTHINESS = "healthiness"
     const val ORDER_BY_CALORIES = "calories"
     const val ORDER_BY_TIME = "time"
 

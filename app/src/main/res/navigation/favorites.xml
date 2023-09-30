@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.bassul.flavorfusion.presentation.favorites.FavoritesFragment"
-        android:label="fragment_favorites"
+        android:label="@string/favorites"
         tools:layout="@layout/fragment_favorites" />
 </navigation>

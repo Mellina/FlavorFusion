@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_margin="@dimen/margin_medium">
 
     <TextView
         android:id="@+id/text_order_by_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sort By"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:text="@string/sort_by"
+        android:textColor="@color/text_dark"
+        android:textSize="@dimen/font_title"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,25 +31,19 @@
             android:id="@+id/chip_popularity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Popularity" />
-
-        <com.google.android.material.chip.Chip
-            android:id="@+id/chip_healthiness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Healthiness" />
+            android:text="@string/popularity" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_calories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="calories" />
+            android:text="@string/calories" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Time" />
+            android:text="@string/time" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -57,9 +51,9 @@
         android:id="@+id/text_order_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Sort Order"
-        android:textColor="@color/black"
-        android:textSize="18sp"
+        android:text="@string/sort_order"
+        android:textColor="@color/text_dark"
+        android:textSize="@dimen/font_title"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/chip_group_order_by"
         app:layout_constraintTop_toBottomOf="@id/chip_group_order_by" />
@@ -79,13 +73,13 @@
             android:id="@+id/chip_ascending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ascending" />
+            android:text="@string/ascending" />
 
         <com.google.android.material.chip.Chip
             android:id="@+id/chip_descending"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Descending" />
+            android:text="@string/descending" />
 
     </com.google.android.material.chip.ChipGroup>
 
@@ -93,7 +87,7 @@
         android:id="@+id/flipper_apply"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chip_group_order">
@@ -102,16 +96,15 @@
             android:id="@+id/button_apply_sort"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="?attr/colorPrimary"
-            android:textColor="@color/white"
-            android:text="Apply" />
+            android:text="@string/apply"
+            android:textColor="@color/light_blue"
+            app:backgroundTint="?attr/colorPrimary" />
 
         <ProgressBar
             android:id="@+id/progress_sort"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:layout_gravity="center" />
-
     </ViewFlipper>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

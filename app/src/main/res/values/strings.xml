@@ -1,5 +1,40 @@
 <resources>
-    <string name="app_name">FlavorFusion</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Flavor Fusion</string>
+
+    <!--App bar-->
+    <string name="menu_sort">Menu sort</string>
+    <string name="search">Search</string>
+
+    <!--Sort Options-->
+    <string name="sort_by">Sort By</string>
+    <string name="popularity">Popularity</string>
+    <string name="calories">calories</string>
+    <string name="time">Time</string>
+    <string name="sort_order">Sort Order</string>
+    <string name="ascending">Ascending</string>
+    <string name="descending">Descending</string>
+    <string name="apply">Apply</string>
+
+    <!--Details-->
+    <string name="dish_type">Dish Type</string>
+    <string name="ingredient">Ingredient</string>
+    <plurals name="ready_in_minutes">
+        <item quantity="one">%d minute</item>
+        <item quantity="other">%d minutes</item>
+    </plurals>
+
+    <string name="item_dish_type">• %s\n</string>
+
+    <!--Favorites-->
+    <string name="empty_favorites">No favorites</string>
+
+    <!--Error -->
+    <string name="error_to_load_datas">Error to load datas</string>
+    <string name="error_to_add_favorite">Error to add to favorites</string>
+    <string name="error_to_remove_favorite">Error to remove to favorites</string>
+    <string name="try_again">Try again</string>
+    <string name="error_load_next_page_try_again">Error when trying to load the next page. Try again</string>
+    <string name="offline_error">You are offline. Check your internet connection and try again</string>
+    <string name="favorites">Favorites</string>
+
 </resources>

@@ -2,10 +2,10 @@ package com.bassul.flavorfusion.presentation.detail
 
 import android.os.Bundle
 import android.transition.TransitionInflater
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -15,6 +15,7 @@ import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentDetailBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.presentation.extensions.showShortToast
+import com.bassul.flavorfusion.util.uppercaseFirstLetter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -50,10 +51,10 @@ class DetailFragment : Fragment() {
             transitionName = detailViewArg.name
             imageLoader.load(
                 this,
-                detailViewArg.imageUrl,
-                R.drawable.ic_launcher_background
-            )//provisório - colocar imagem de erro ao carregar
+                detailViewArg.imageUrl
+            )
         }
+
         setSharedElementTransitionOnEnter()
 
         loadDetailsAndObserveUiState(detailViewArg)
@@ -71,16 +72,18 @@ class DetailFragment : Fragment() {
                 is UiActionStateLiveData.UiState.Success -> {
                     uiState.detailsRecipe.toString()
 
-                    ingredientsAdapter = IngredientsAdapter(imageLoader)
-                    lifecycleScope.launch {
-                        viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                            ingredientsAdapter.submitList(uiState.detailsRecipe.extendedIngredients)
-                        }
-                    }
-                    binding.ingredients.listIngredients.run {
-                        setHasFixedSize(true)
-                        adapter = ingredientsAdapter
-                    }
+                    binding.includeViewDetailsSuccessState.amountServer.text =
+                        uiState.detailsRecipe.servings.toString()
+
+                    binding.includeViewDetailsSuccessState.readyInMinutes.text =
+                        context?.resources?.getQuantityString(
+                            R.plurals.ready_in_minutes,
+                            uiState.detailsRecipe.readyInMinutes,
+                            uiState.detailsRecipe.readyInMinutes,
+                        )
+
+                    setDishTypes(uiState)
+                    setIngredientsList(uiState)
 
                     FLIPPER_CHILD_POSITION_SUCCESS
                 }
@@ -92,10 +95,35 @@ class DetailFragment : Fragment() {
                     FLIPPER_CHILD_POSITION_ERROR
                 }
             }
+        }
+    }
 
+    private fun setDishTypes(uiState: UiActionStateLiveData.UiState.Success) {
+        val dishTypes = StringBuilder()
+        uiState.detailsRecipe.dishTypes.forEach { dishType ->
+
+            dishTypes.append(
+                context?.resources?.getString(
+                    R.string.item_dish_type,
+                    dishType.uppercaseFirstLetter()
+                )
+            )
         }
 
+        binding.includeViewDetailsSuccessState.dishType.text = dishTypes
+    }
 
+    private fun setIngredientsList(uiState: UiActionStateLiveData.UiState.Success) {
+        ingredientsAdapter = IngredientsAdapter(imageLoader)
+        lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                ingredientsAdapter.submitList(uiState.detailsRecipe.extendedIngredients)
+            }
+        }
+        binding.includeViewDetailsSuccessState.ingredients.listIngredients.run {
+            setHasFixedSize(true)
+            adapter = ingredientsAdapter
+        }
     }
 
     private fun setAndObserveFavoriteUiState(detailViewArg: DetailViewArg) {
@@ -121,8 +149,6 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     private fun setSharedElementTransitionOnEnter() {
@@ -145,5 +171,4 @@ class DetailFragment : Fragment() {
         private const val FLIPPER_FAVORITE_CHILD_POSITION_IMAGE = 0
         private const val FLIPPER_FAVORITE_CHILD_POSITION_LOADING = 1
     }
-
 }
