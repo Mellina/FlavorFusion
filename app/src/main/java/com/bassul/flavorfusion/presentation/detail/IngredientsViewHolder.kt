@@ -25,7 +25,6 @@ class IngredientsViewHolder @Inject constructor(
         imageLoader.load(
             image,
             ingredient.getImageUrl(),
-            androidx.appcompat.R.drawable.btn_checkbox_checked_mtrl
         )
         name.text = ingredient.name
     }

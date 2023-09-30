@@ -97,11 +97,7 @@ class RecipesRemoteMediator @Inject constructor(
 
         } catch (e: HttpException) {
             MediatorResult.Error(e)
-
         }
     }
-
-
-
 
 }

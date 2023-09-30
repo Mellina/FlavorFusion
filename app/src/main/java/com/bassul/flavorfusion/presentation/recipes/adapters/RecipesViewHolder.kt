@@ -22,7 +22,7 @@ class RecipesViewHolder @Inject constructor(
     fun bind(recipe: Recipe) {
         textTitle.text = recipe.title
         imageRecipe.transitionName = recipe.title
-        imageLoader.load(imageRecipe, recipe.image, androidx.appcompat.R.drawable.btn_checkbox_checked_mtrl)
+        imageLoader.load(imageRecipe, recipe.image)
 
         itemView.setOnClickListener {
             onItemClick.invoke(recipe, imageRecipe)

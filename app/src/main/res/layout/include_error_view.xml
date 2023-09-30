@@ -13,7 +13,7 @@
         android:layout_margin="@dimen/margin_small"
         android:text="@string/error_to_load_datas"
         android:textAlignment="center"
-        android:textSize="32sp"
+        android:textSize="@dimen/font_title"
         app:drawableTopCompat="@android:drawable/stat_notify_error" />
 
     <Button

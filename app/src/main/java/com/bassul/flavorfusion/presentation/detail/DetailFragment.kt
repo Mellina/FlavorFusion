@@ -15,6 +15,7 @@ import com.bassul.flavorfusion.R
 import com.bassul.flavorfusion.databinding.FragmentDetailBinding
 import com.bassul.flavorfusion.framework.imageloader.ImageLoader
 import com.bassul.flavorfusion.presentation.extensions.showShortToast
+import com.bassul.flavorfusion.util.uppercaseFirstLetter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -50,8 +51,7 @@ class DetailFragment : Fragment() {
             transitionName = detailViewArg.name
             imageLoader.load(
                 this,
-                detailViewArg.imageUrl,
-                R.drawable.ic_broken_image
+                detailViewArg.imageUrl
             )
         }
 
@@ -102,8 +102,12 @@ class DetailFragment : Fragment() {
         val dishTypes = StringBuilder()
         uiState.detailsRecipe.dishTypes.forEach { dishType ->
 
-            val dishTypeCapitalized = dishType.replaceFirstChar { it.uppercaseChar() }
-            dishTypes.append("• $dishTypeCapitalized\n")
+            dishTypes.append(
+                context?.resources?.getString(
+                    R.string.item_dish_type,
+                    dishType.uppercaseFirstLetter()
+                )
+            )
         }
 
         binding.includeViewDetailsSuccessState.dishType.text = dishTypes
@@ -145,8 +149,6 @@ class DetailFragment : Fragment() {
                 }
             }
         }
-
-
     }
 
     private fun setSharedElementTransitionOnEnter() {
@@ -169,5 +171,4 @@ class DetailFragment : Fragment() {
         private const val FLIPPER_FAVORITE_CHILD_POSITION_IMAGE = 0
         private const val FLIPPER_FAVORITE_CHILD_POSITION_LOADING = 1
     }
-
 }

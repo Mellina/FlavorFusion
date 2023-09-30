@@ -59,7 +59,6 @@ class SortFragment : BottomSheetDialogFragment() {
 
         binding.buttonApplySort.setOnClickListener {
             viewModel.applySorting(orderBy, order)
-           // dismiss()
         }
     }
 
@@ -99,7 +98,6 @@ class SortFragment : BottomSheetDialogFragment() {
                             SORTING_APPLIED_BASK_STACK_KEY,
                             true
                         )
-
                         popBackStack()
                     }
                     binding.flipperApply.displayedChild = FLIPPER_CHILD_BUTTON

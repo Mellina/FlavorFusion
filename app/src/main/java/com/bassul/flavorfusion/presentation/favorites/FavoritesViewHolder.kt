@@ -21,8 +21,7 @@ class FavoritesViewHolder(
         imageLoader.load(
             imageRecipe,
             data.imageUrl,
-            0
-        ) //Arrumar para esse fallback nao ser obrigatorio
+        )
     }
 
     companion object {

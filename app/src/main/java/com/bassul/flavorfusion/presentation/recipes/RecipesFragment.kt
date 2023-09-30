@@ -97,7 +97,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
                     )
                 }
             }
-
         }
 
         viewModel.searchRecipes()
@@ -194,7 +193,6 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
             if (event == Lifecycle.Event.ON_DESTROY) {
                 navBackStackEntry.lifecycle.removeObserver(observer)
             }
-
         })
     }
 
@@ -202,9 +200,7 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         inflater.inflate(R.menu.recipes_menu_items, menu)
 
         val searchItem = menu.findItem(R.id.menu_search)
-
         searchView = searchItem.actionView as SearchView
-
         searchItem.setOnActionExpandListener(this)
 
         if (viewModel.currentSearchQuery.isNotEmpty()) {
@@ -262,6 +258,4 @@ class RecipesFragment : Fragment(), SearchView.OnQueryTextListener,
         private const val FLIPPER_CHILD_CHARACTERS = 1
         private const val FLIPPER_CHILD_ERROR = 2
     }
-
-
 }
