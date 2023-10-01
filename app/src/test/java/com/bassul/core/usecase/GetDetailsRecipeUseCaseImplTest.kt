@@ -30,7 +30,7 @@ class GetDetailsRecipeUseCaseImplTest {
 
     private val recipe = RecipeFactory().create(RecipeFactory.Recipe.Juice)
     private val detailsRecipe =
-        DetailRecipeFactory().create(DetailRecipeFactory.FakeDetailRecipe.FakeDetailRecipe1)
+        DetailRecipeFactory().create(DetailRecipeFactory.FakeDetailRecipe.FakeCheeseMacaroni)
 
     @Before
     fun setUp() {

@@ -15,6 +15,5 @@ suspend fun <T> Flow<ResultStatus<T>>.watchStatus(
             is ResultStatus.Success -> success.invoke(status.data)
             is ResultStatus.Error -> error.invoke(status.throwable)
         }
-
     }
 }

@@ -53,7 +53,7 @@ class DetailViewModelTest {
     private lateinit var favoriteUiStateObserver: Observer<FavoriteUiActionStateLiveData.UiState>
 
     private val detailRecipe =
-        listOf(DetailRecipeFactory().create(DetailRecipeFactory.FakeDetailRecipe.FakeDetailRecipe1))
+        listOf(DetailRecipeFactory().create(DetailRecipeFactory.FakeDetailRecipe.FakeCheeseMacaroni))
 
     private lateinit var detailViewModel: DetailViewModel
 

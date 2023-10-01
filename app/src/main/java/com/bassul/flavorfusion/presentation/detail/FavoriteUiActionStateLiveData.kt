@@ -40,8 +40,6 @@ class FavoriteUiActionStateLiveData(
                             },
                             error = {}
                         )
-
-
                 }
 
                 is Action.AddFavorite -> {
@@ -58,7 +56,7 @@ class FavoriteUiActionStateLiveData(
 
                             },
                             error = {
-                                //emit(UiState.Error) preciso criar a string
+                                emit(UiState.Error(R.string.error_to_add_favorite))
                             }
                         )
                     }
@@ -77,7 +75,7 @@ class FavoriteUiActionStateLiveData(
                                 emitFavoriteIcon()
                             },
                             error = {
-                                //Add erro depois, criar mensagem de erro depois
+                                emit(UiState.Error(R.string.error_to_remove_favorite))
                             }
                         )
                     }

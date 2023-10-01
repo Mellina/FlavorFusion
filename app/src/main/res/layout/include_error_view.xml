@@ -10,16 +10,16 @@
         android:id="@+id/text_initial_loading_error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="Error to load datas"
+        android:layout_margin="@dimen/margin_small"
+        android:text="@string/error_to_load_datas"
         android:textAlignment="center"
-        android:textSize="32sp"
+        android:textSize="@dimen/font_title"
         app:drawableTopCompat="@android:drawable/stat_notify_error" />
 
     <Button
         android:id="@+id/button_retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Try again" />
+        android:text="@string/try_again" />
 
 </LinearLayout>

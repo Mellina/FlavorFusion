@@ -48,7 +48,6 @@ class RecipesPagingSource(
         }
     }
 
-
     companion object {
         private const val LIMIT = 2
     }

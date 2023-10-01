@@ -7,10 +7,10 @@
 
     <TextView
         android:id="@+id/title_ingredient"
-        style="@style/TextAppearance.MaterialComponents.Headline6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingredient"
+        android:text="@string/ingredient"
+        style="@style/Title2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -18,7 +18,7 @@
         android:id="@+id/list_ingredients"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/margin_small"
         android:orientation="horizontal"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"

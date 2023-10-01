@@ -9,11 +9,14 @@
     <fragment
         android:id="@+id/recipesFragment"
         android:name="com.bassul.flavorfusion.presentation.recipes.RecipesFragment"
-        android:label="fragment_recipes"
+        android:label="Flavor Fusion"
         tools:layout="@layout/fragment_recipes" >
         <action
             android:id="@+id/action_recipesFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_recipesFragment_to_sortFragment"
+            app:destination="@id/sortFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
@@ -29,4 +32,8 @@
             app:argType="com.bassul.flavorfusion.presentation.detail.DetailViewArg" />
 
     </fragment>
+    <dialog
+        android:id="@+id/sortFragment"
+        android:name="com.bassul.flavorfusion.presentation.sort.SortFragment"
+        tools:layout="@layout/fragment_sort"/>
 </navigation>
