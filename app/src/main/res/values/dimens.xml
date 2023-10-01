@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="icon_size">24dp</dimen>
+
+    <dimen name="card_recipe_height">230dp</dimen>
+    <dimen name="image_card_recipe_height">170dp</dimen>
+    <dimen name="bottom_navigation_view_height">56dp</dimen>
+
+    <dimen name="image_details_height">200dp</dimen>
+
+    <dimen name="image_ingredient_height">70dp</dimen>
+    <dimen name="image_ingredient_width">90dp</dimen>
+
+    <dimen name="drawable_padding">4dp</dimen>
+    <dimen name="corner_radius">4dp</dimen>
+
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+
+    <dimen name="font_title">18sp</dimen>
+    <dimen name="font_subtitle">18sp</dimen>
+
+</resources>

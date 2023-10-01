@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".presentation.detail.DetailFragment">
+
+    <ImageView
+        android:id="@+id/image_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/image_details_height"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <ViewFlipper
+        android:id="@+id/flipper_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginEnd="@dimen/margin_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/image_favorite_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:importantForAccessibility="no"
+            tools:srcCompat="@drawable/ic_favorite_unchecked" />
+
+        <ProgressBar
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
+            android:layout_gravity="center" />
+    </ViewFlipper>
+
+    <ViewFlipper
+        android:id="@+id/flipper_details"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_recipe">
+
+        <include layout="@layout/include_view_details_loading_state" />
+
+        <include
+            android:id="@+id/include_view_details_success_state"
+            layout="@layout/include_view_details_success_state" />
+
+        <include
+            android:id="@+id/include_error_view"
+            layout="@layout/include_error_view" />
+
+    </ViewFlipper>
+</androidx.constraintlayout.widget.ConstraintLayout>

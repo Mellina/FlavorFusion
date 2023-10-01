@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Recipes" />
+        android:icon="@drawable/ic_recipes"
+        android:title="" />
     <item
         android:id="@+id/favorites"
-        android:icon="@drawable/ic_launcher_foreground"
-        android:title="Favorites" />
+        android:icon="@drawable/ic_favorite_checked"
+        android:title="" />
 </menu>

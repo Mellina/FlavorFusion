@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/amount_server"
+            style="@style/Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:drawablePadding="@dimen/drawable_padding"
+            app:drawableLeftCompat="@drawable/ic_people"
+            app:drawableTint="@color/dark_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="5" />
+
+        <TextView
+            android:id="@+id/ready_in_minutes"
+            style="@style/Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="@dimen/drawable_padding"
+            app:drawableLeftCompat="@drawable/ic_time"
+            app:drawableTint="@color/dark_blue"
+            app:layout_constraintStart_toEndOf="@+id/amount_server"
+            app:layout_constraintTop_toTopOf="@+id/amount_server"
+            tools:text="60 minutes" />
+
+        <TextView
+            android:id="@+id/title_dish_type"
+            style="@style/Title2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/dish_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/amount_server" />
+
+        <TextView
+            android:id="@+id/dish_type"
+            style="@style/Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_dish_type"
+            tools:text="* lunch" />
+
+        <include
+            android:id="@+id/ingredients"
+            layout="@layout/list_ingredient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@+id/dish_type" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

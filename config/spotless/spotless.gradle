@@ -1,0 +1,17 @@
+spotless {
+
+    kotlin {
+        ktfmt()
+        ktlint()
+        diktat()
+        prettier()
+
+        trimTrailingWhitespace()
+        indentWithSpaces()
+    }
+
+    kotlinGradle {
+        target '*.gradle.kts'
+        ktlint()
+    }
+}
