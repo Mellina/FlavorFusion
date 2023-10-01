@@ -2,7 +2,7 @@
 Flavor Fusion is a recipe search application built in Kotlin, using MVVM architecture and Jetpack libraries.
 
 
-# Used libraries
+## Used libraries
 
 Network Management
 * Retrofit
@@ -37,3 +37,8 @@ Unit Testing
 
 Optimization and Security
 * Proguard
+
+## Contact
+[LinkedIn](https://www.linkedin.com/in/mellina-cerqueira/)
+
+
