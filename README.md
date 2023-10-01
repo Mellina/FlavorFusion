@@ -1,11 +1,11 @@
 <details>
   <summary>Table of Contents</summary>
   <ol>
-    <li><a href="#flavorfusion">The Project</a></li>
-    <li><a href="#architecture">Architecture</a></li>
-    <li><a href="#used-libraries">Used libraries</a></li>
-     <li><a href="#used-libraries">Build Process</a></li>
-    <li><a href="#contact">Contact</a></li>
+    <li><a href="#-flavorfusion">The Project</a></li>
+    <li><a href="#-architecture">Architecture</a></li>
+    <li><a href="#-used-libraries">Used libraries</a></li>
+     <li><a href="#-used-libraries">Build Process</a></li>
+    <li><a href="#-contact">Contact</a></li>
     <li><a href="#-credits">Credits</a></li>
   </ol>
 </details>
@@ -112,4 +112,4 @@ That's it! Now you can build the project.
 The data consumed in this app comes from the [Food API](https://spoonacular.com/food-api)
  
 App developed based on learning acquired at [CAMP](https://douglasmotta.com.br/curso-android-moderno-profissional/) 
-<p align="right"><a href="#readme-top">back to top</a></p>
+<p align="right"><a href="#-readme-top">back to top</a></p>
