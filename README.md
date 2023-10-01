@@ -1,3 +1,4 @@
+[](#readme-top)
 <details>
   <summary>Table of Contents</summary>
   <ol>
@@ -112,4 +113,4 @@ That's it! Now you can build the project.
 The data consumed in this app comes from the [Food API](https://spoonacular.com/food-api)
  
 App developed based on learning acquired at [CAMP](https://douglasmotta.com.br/curso-android-moderno-profissional/) 
-<p align="right"><a href="#-readme-top">back to top</a></p>
+<p align="right"><a href="#readme-top">back to top</a></p>
