@@ -11,10 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/margin_small"
+        android:drawablePadding="@dimen/drawable_padding"
         android:text="@string/error_to_load_datas"
         android:textAlignment="center"
         android:textSize="@dimen/font_title"
-        app:drawableTopCompat="@android:drawable/stat_notify_error" />
+        app:drawableTopCompat="@drawable/ic_no_data" />
 
     <Button
         android:id="@+id/button_retry"

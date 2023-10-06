@@ -19,9 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:alpha="0.5"
         android:drawablePadding="@dimen/drawable_padding"
         android:text="@string/empty_favorites"
+        android:textAlignment="center"
+        android:textSize="@dimen/font_title"
         app:drawableTopCompat="@drawable/ic_favorite_unchecked" />
 
 </ViewFlipper>
